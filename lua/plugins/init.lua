@@ -1,13 +1,5 @@
 return {
   {
-    "stevearc/conform.nvim",
-    -- event = 'BufWritePre', -- uncomment for format on save
-    config = function()
-      require "configs.conform"
-    end,
-  },
-
-  {
     "neovim/nvim-lspconfig",
     config = function()
       require("nvchad.configs.lspconfig").defaults()
@@ -21,8 +13,6 @@ return {
   		ensure_installed = {
   			"lua-language-server", "stylua",
   			"html-lsp", "css-lsp" , "prettier",
-        "typescript-language-server", "eslint-lsp",
-        "pyright", "pylint"
   		},
   	},
   },
@@ -32,14 +22,8 @@ return {
   	opts = {
   		ensure_installed = {
   			"vim", "lua", "vimdoc",
-        "html", "css"
   		},
   	},
-  },
-
-  {
-    "norcalli/nvim-colorizer.lua",
-    event = "VeryLazy",
   },
 
   {
