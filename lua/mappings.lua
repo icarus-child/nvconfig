@@ -15,4 +15,4 @@ map("n", "<leader>gv", "<cmd>BlameToggle virtual<CR>", { desc = "Git blame virtu
 map("i", "jk", "<ESC>")
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
--- map("n", "<C-I>", "<C-I>", {noremap = true})
+map("n", "<Tab>", "<Tab>", {noremap = true})

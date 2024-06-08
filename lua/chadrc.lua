@@ -7,10 +7,19 @@ local M = {}
 M.ui = {
 	theme = "ayu_light",
 
-	-- hl_override = {
-	-- 	Comment = { italic = true },
-	-- 	["@comment"] = { italic = true },
-	-- },
+	hl_override = {
+		Comment = { italic = true },
+		["@comment"] = { italic = true },
+	},
+
+  tabufline = {
+    enabled = false,
+    modules = {
+      treeOffset = function()
+        return ""
+      end
+    }
+  }
 }
 
 return M
