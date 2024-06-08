@@ -11,7 +11,8 @@ map("n", "<leader>dr", "<cmd>diffget RE<CR>", { desc = "Diff Get Remote" })
 map("n", "<leader>gw", "<cmd>BlameToggle window<CR>", { desc = "Git blame window" })
 map("n", "<leader>gv", "<cmd>BlameToggle virtual<CR>", { desc = "Git blame virtual" })
 
-map("n", ";", ":", { desc = "CMD enter command mode" })
+-- map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
+-- map("n", "<C-I>", "<C-I>", {noremap = true})
