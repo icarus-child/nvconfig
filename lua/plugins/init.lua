@@ -5,6 +5,21 @@ return {
   },
 
   {
+    "norcalli/nvim-colorizer.lua",
+    enabled = false
+  },
+
+  {
+    'stevearc/oil.nvim',
+    event = "VeryLazy",
+    -- Optional dependencies
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require "configs.oil"
+    end
+  },
+
+  {
     "neovim/nvim-lspconfig",
     config = function()
       require("nvchad.configs.lspconfig").defaults()
