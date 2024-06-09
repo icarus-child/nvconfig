@@ -19,6 +19,10 @@ M.ui = {
         return ""
       end
     }
+  },
+
+  statusline = {
+    separator_style = "block"
   }
 }
 
