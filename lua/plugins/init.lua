@@ -1,5 +1,10 @@
 return {
   {
+    "nvim-tree/nvim-tree.lua",
+    enabled = false
+  },
+
+  {
     "neovim/nvim-lspconfig",
     config = function()
       require("nvchad.configs.lspconfig").defaults()
