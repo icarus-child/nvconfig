@@ -16,5 +16,5 @@ map("n", "<Tab>", "<Tab>", {noremap = true})
 
 map("i", "jk", "<ESC>")
 
-map("n", "<leader>e", "<cmd>Ex<CR>", { desc = "Open netrw" })
-map("n", "<C-n>", "<cmd>Rex<CR>", { desc = "Return to/from netrw (Rex)" })
+map("n", "<leader>e", "<cmd>Oil --float<CR>", { desc = "Floating Oil Window" })
+map("n", "<C-n>", "<cmd>Oil<CR>", { desc = "Oil Window" })
