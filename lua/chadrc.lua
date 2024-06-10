@@ -7,10 +7,13 @@ local M = {}
 M.ui = {
 	theme = "ayu_light",
 
-	hl_override = {
-		Comment = { italic = true },
-		["@comment"] = { italic = true },
-	},
+  changed_themes = {
+    ayu_light = {
+      base_30 = {
+        grey_fg = "#a9a9a9", -- comments
+      }
+    },
+  },
 
   tabufline = {
     enabled = false,
