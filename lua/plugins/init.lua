@@ -115,4 +115,18 @@ return {
       require("blame").setup()
     end
   },
+
+  {
+    "brenoprata10/nvim-highlight-colors",
+    event = "VeryLazy",
+    config = function()
+      vim.opt.termguicolors = true
+      require("nvim-highlight-colors").setup({})
+    end
+  },
+
+  {
+    "jeetsukumaran/vim-indentwise",
+    event = "VeryLazy"
+  }
 }
