@@ -50,8 +50,9 @@ require("neorg").setup {
         default_workspace = "personal",
       },
     },
+    ["core.export"] = {}
   },
 }
 
 vim.wo.foldlevel = 99
-vim.wo.conceallevel = 3
+vim.wo.conceallevel = 0
