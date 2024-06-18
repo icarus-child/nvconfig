@@ -56,6 +56,9 @@ require("neorg").setup {
         engine = "nvim-cmp"
       }
     },
+    ["core.journal"] = {
+      strategy = "flat"
+    },
   },
 }
 
