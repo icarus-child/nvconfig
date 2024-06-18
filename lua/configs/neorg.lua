@@ -50,7 +50,12 @@ require("neorg").setup {
         default_workspace = "personal",
       },
     },
-    ["core.export"] = {}
+    ["core.export"] = {},
+    ["core.completion"] = {
+      config = {
+        engine = "nvim-cmp"
+      }
+    },
   },
 }
 
