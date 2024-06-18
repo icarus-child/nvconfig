@@ -57,10 +57,11 @@ require("neorg").setup {
       }
     },
     ["core.journal"] = {
-      strategy = "flat"
+      config = {
+        strategy = "flat"
+      }
     },
   },
 }
 
 vim.wo.foldlevel = 99
-vim.wo.conceallevel = 0
