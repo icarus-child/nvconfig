@@ -72,6 +72,20 @@ return {
   },
 
   {
+    "hrsh7th/nvim-cmp",
+    dependencies = {
+      "nvim-neorg/neorg"
+    },
+    config = function()
+      require("cmp").setup({
+        sources = {
+          { name = "neorg" }
+        }
+      })
+    end
+  },
+
+  {
     "jeffkreeftmeijer/vim-numbertoggle",
     event = "VeryLazy",
   },

@@ -50,9 +50,18 @@ require("neorg").setup {
         default_workspace = "work",
       },
     },
-    ["core.export"] = {}
+    ["core.export"] = {},
+    ["core.completion"] = {
+      config = {
+        engine = "nvim-cmp"
+      }
+    },
+    ["core.journal"] = {
+      config = {
+        strategy = "flat"
+      }
+    },
   },
 }
 
 vim.wo.foldlevel = 99
-vim.wo.conceallevel = 0
