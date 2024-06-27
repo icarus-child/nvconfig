@@ -61,6 +61,7 @@ require("neorg").setup {
         strategy = "flat"
       }
     },
+    ["core.summary"] = {},
   },
 }
 
