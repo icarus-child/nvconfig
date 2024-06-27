@@ -1,12 +1,12 @@
 return {
   {
     "nvim-tree/nvim-tree.lua",
-    enabled = false
+    enabled = false,
   },
 
   {
     "norcalli/nvim-colorizer.lua",
-    enabled = false
+    enabled = false,
   },
 
   {
@@ -14,18 +14,18 @@ return {
     event = "VeryLazy",
     config = function()
       vim.opt.termguicolors = true
-      require("nvim-highlight-colors").setup({})
-    end
+      require("nvim-highlight-colors").setup {}
+    end,
   },
 
   {
-    'stevearc/oil.nvim',
+    "stevearc/oil.nvim",
     event = "VeryLazy",
     -- Optional dependencies
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       require "configs.oil"
-    end
+    end,
   },
 
   {
@@ -37,22 +37,30 @@ return {
   },
 
   {
-  	"williamboman/mason.nvim",
-  	opts = {
-  		ensure_installed = {
-  			"lua-language-server", "stylua",
-  			"html-lsp", "css-lsp" , "prettier",
-  		},
-  	},
+    "williamboman/mason.nvim",
+    opts = {
+      ensure_installed = {
+        "lua-language-server",
+        "stylua",
+        "html-lsp",
+        "css-lsp",
+        "prettier",
+        "bash-language-server",
+        "tsserver",
+        "eslint-lsp",
+      },
+    },
   },
 
   {
-  	"nvim-treesitter/nvim-treesitter",
-  	opts = {
-  		ensure_installed = {
-  			"vim", "lua", "vimdoc",
-  		},
-  	},
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      ensure_installed = {
+        "vim",
+        "lua",
+        "vimdoc",
+      },
+    },
   },
 
   {
@@ -71,19 +79,19 @@ return {
     end,
   },
 
-  {
-    "hrsh7th/nvim-cmp",
-    dependencies = {
-      "nvim-neorg/neorg"
-    },
-    config = function()
-      require("cmp").setup({
-        sources = {
-          { name = "neorg" }
-        }
-      })
-    end
-  },
+  -- {
+  --   "hrsh7th/nvim-cmp",
+  --   dependencies = {
+  --     "nvim-neorg/neorg"
+  --   },
+  --   config = function()
+  --     require("cmp").setup({
+  --       sources = {
+  --         { name = "neorg" }
+  --       }
+  --     })
+  --   end
+  -- },
 
   {
     "jeffkreeftmeijer/vim-numbertoggle",
@@ -95,10 +103,10 @@ return {
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
     config = function()
-      require("nvim-surround").setup({
+      require("nvim-surround").setup {
         -- Configuration here, or leave empty to use defaults
-      })
-    end
+      }
+    end,
   },
 
   {
@@ -113,13 +121,13 @@ return {
     },
     -- optional for floating window border decoration
     dependencies = {
-        "nvim-lua/plenary.nvim",
+      "nvim-lua/plenary.nvim",
     },
     -- setting the keybinding for LazyGit with 'keys' is recommended in
     -- order to load the plugin when the command is run for the first time
     keys = {
-       { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
-    }
+      { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+    },
   },
 
   {
@@ -127,7 +135,7 @@ return {
     event = "VeryLazy",
     config = function()
       require("blame").setup()
-    end
+    end,
   },
 
   {
@@ -135,12 +143,22 @@ return {
     event = "VeryLazy",
     config = function()
       vim.opt.termguicolors = true
-      require("nvim-highlight-colors").setup({})
-    end
+      require("nvim-highlight-colors").setup {}
+    end,
   },
 
   {
     "jeetsukumaran/vim-indentwise",
-    event = "VeryLazy"
-  }
+    event = "VeryLazy",
+  },
+
+  {
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    event = "VeryLazy",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require "configs.harpoon"
+    end
+  },
 }
