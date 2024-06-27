@@ -52,9 +52,9 @@ require("neorg").setup {
     },
     ["core.export"] = {},
     ["core.completion"] = {
-      config = {
-        engine = "nvim-cmp"
-      }
+      -- config = {
+      --   engine = "nvim-cmp"
+      -- }
     },
     ["core.journal"] = {
       config = {
