@@ -59,6 +59,8 @@ return {
         "vim",
         "lua",
         "vimdoc",
+        "gdscript",
+        "gdshader",
       },
     },
   },
@@ -159,6 +161,6 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       require "configs.harpoon"
-    end
+    end,
   },
 }
