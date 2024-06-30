@@ -47,7 +47,7 @@ require("neorg").setup {
           personal = "~/notes/personal",
           work = "~/notes/work",
         },
-        default_workspace = "work",
+        default_workspace = "personal",
       },
     },
     ["core.export"] = {},
