@@ -48,6 +48,7 @@ return {
         "bash-language-server",
         "tsserver",
         "eslint-lsp",
+        "python-lsp-server",
       },
     },
   },
@@ -59,6 +60,9 @@ return {
         "vim",
         "lua",
         "vimdoc",
+        "python",
+        "gdscript",
+        "gdshader",
       },
     },
   },
@@ -159,6 +163,6 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       require "configs.harpoon"
-    end
+    end,
   },
 }
