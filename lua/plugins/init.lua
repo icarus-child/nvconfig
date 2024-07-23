@@ -47,7 +47,7 @@ return {
         "prettier",
         "bash-language-server",
         "tsserver",
-        "eslint-lsp",
+        -- "eslint-lsp",
         "python-lsp-server",
       },
     },
@@ -57,12 +57,14 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = {
       ensure_installed = {
+        "bash",
         "vim",
         "lua",
         "vimdoc",
         "python",
         "gdscript",
         "gdshader",
+        "typescript",
       },
     },
   },
