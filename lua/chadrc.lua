@@ -76,7 +76,23 @@ M.ui = {
   },
 
   statusline = {
-    separator_style = "block"
+    separator_style = "block",
+
+    -- Need to update only on save / load / etc. not all the time
+    -- order = { "mode", "file", "git", "%=", "lsp_msg", "%=", "diagnostics", "linter", "lsp", "cwd", "cursor" },
+    -- modules = {
+    --   linter = function()
+    --     local status, lint = pcall(require, "lint")
+    --     if not status then
+    --       return "  Linter Failed "
+    --     end
+    --     local linters = lint.get_running()
+    --     if #linters == 0 then
+    --         return " 󰦕 No Linter "
+    --     end
+    --     return "󱉶 " .. table.concat(linters, ", ")
+    --   end
+    -- }
   }
 }
 
