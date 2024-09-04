@@ -18,3 +18,5 @@ map("i", "jk", "<ESC>")
 
 map("n", "<leader>e", "<cmd>Oil --float<CR>", { desc = "Floating Oil Window" })
 map("n", "<C-n>", "<cmd>Oil<CR>", { desc = "Oil Window" })
+
+map("n", "<leader>u", "<cmd>Telescope undo<cr>", { desc = "Undo history" })

@@ -177,9 +177,32 @@ return {
   },
 
   {
+    "debugloop/telescope-undo.nvim",
+    dependencies = { -- note how they're inverted to above example
+      {
+        "nvim-telescope/telescope.nvim",
+        dependencies = { "nvim-lua/plenary.nvim" },
+      },
+    },
+    opts = {
+      -- don't use `defaults = { }` here, do this in the main telescope spec
+      extensions = {
+        undo = {
+          -- telescope-undo.nvim config, see below
+        },
+        -- no other extensions here, they can have their own spec too
+      },
+    },
+    config = function(_, opts)
+      require("telescope").setup(opts)
+      require("telescope").load_extension "undo"
+    end,
+  },
+
+  {
     "stevearc/conform.nvim",
     opts = {
-      require "configs.conform"
+      require "configs.conform",
     },
   },
 
@@ -190,25 +213,24 @@ return {
       "BufNewFile",
     },
     config = function()
-      local lint = require("lint")
+      local lint = require "lint"
 
       lint.linters_by_ft = {
-        gdscript = { "gdlint" }
+        gdscript = { "gdlint" },
       }
 
       local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 
       vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-          group = lint_augroup,
-          callback = function()
-            lint.try_lint()
-          end,
+        group = lint_augroup,
+        callback = function()
+          lint.try_lint()
+        end,
       })
 
       vim.keymap.set("n", "<leader>lt", function()
         lint.try_lint()
       end, { desc = "Trigger linting for current file" })
-    end
+    end,
   },
-
 }
