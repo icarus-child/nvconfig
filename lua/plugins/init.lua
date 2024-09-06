@@ -243,14 +243,6 @@ return {
   },
 
   {
-    "ggandor/leap.nvim",
-    event = "VeryLazy",
-    opts = {
-        -- add any options here
-    }
-  },
-
-  {
     "kevinhwang91/nvim-bqf",
     event = "VeryLazy",
   },
@@ -262,8 +254,8 @@ return {
       { "<leader>tj", "<cmd>TSJJoin<cr>", desc = "TreeSJ join" },
       { "<leader>ts", "<cmd>TSJSplit<cr>", desc = "TreeSJ split" },
     },
-    dependencies = { 'nvim-treesitter/nvim-treesitter' }, -- if you install parsers with `nvim-treesitter`
-    opts = { use_default_keymaps = false }
+    dependencies = { "nvim-treesitter/nvim-treesitter" }, -- if you install parsers with `nvim-treesitter`
+    opts = { use_default_keymaps = false },
   },
 
   {
