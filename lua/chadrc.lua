@@ -6,6 +6,7 @@ local M = {}
 
 M.ui = {
 	theme = "ayu_light",
+  transparency = false,
 
   changed_themes = {
     ayu_light = {
