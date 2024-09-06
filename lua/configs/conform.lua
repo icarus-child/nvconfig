@@ -6,6 +6,8 @@ local options = {
     javascript = { "prettierd", "prettier", stop_after_first = true },
     typescript = { "prettierd", "prettier", stop_after_first = true },
     gdscript = { "gdformat" },
+    c = { "clang-format" },
+    cpp = { "clang-format" },
   },
 }
 

@@ -57,6 +57,8 @@ return {
         -- "eslint-lsp",
         "python-lsp-server",
         "gdtoolkit",
+        "clang-format",
+        "clangd",
       },
     },
   },
@@ -87,7 +89,7 @@ return {
     "nvim-neorg/neorg",
     dependencies = { "luarocks.nvim" },
     version = "*",
-    lazy = false,
+    lazy = true,
     config = function()
       require "configs.neorg"
     end,
@@ -178,6 +180,7 @@ return {
 
   {
     "debugloop/telescope-undo.nvim",
+    event = "VeryLazy",
     dependencies = { -- note how they're inverted to above example
       {
         "nvim-telescope/telescope.nvim",
@@ -188,7 +191,11 @@ return {
       -- don't use `defaults = { }` here, do this in the main telescope spec
       extensions = {
         undo = {
-          -- telescope-undo.nvim config, see below
+          side_by_side = true,
+          layout_strategy = "vertical",
+          layout_config = {
+            preview_height = 0.8,
+          },
         },
         -- no other extensions here, they can have their own spec too
       },
@@ -259,7 +266,8 @@ return {
   },
 
   {
-    "dstein64/vim-startuptime"
+    "dstein64/vim-startuptime",
+    event = "VeryLazy",
   },
 
   {
@@ -270,5 +278,10 @@ return {
       vim.keymap.set({ "n", "x", "o" }, "gs", "<Plug>(leap-from-window)")
       require("leap").opts.equivalence_classes = { " \t\r\n", "([{", ")]}", "'\"`" }
     end,
+  },
+
+  {
+    "monaqa/dial.nvim",
+    keys = { "<C-a>", { "<C-x>", mode = "n" } },
   },
 }
