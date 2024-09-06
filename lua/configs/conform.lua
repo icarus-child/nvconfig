@@ -9,6 +9,8 @@ local options = {
     bash = { "beautysh" },
     sh = { "beautysh" },
     zsh = { "beautysh" },
+    c = { "clang-format" },
+    cpp = { "clang-format" },
   },
 }
 

@@ -58,6 +58,8 @@ return {
         -- "eslint-lsp",
         "python-lsp-server",
         "gdtoolkit",
+        "clang-format",
+        "clangd",
       },
     },
   },
@@ -88,7 +90,7 @@ return {
     "nvim-neorg/neorg",
     dependencies = { "luarocks.nvim" },
     version = "*",
-    lazy = false,
+    lazy = true,
     config = function()
       require "configs.neorg"
     end,
@@ -179,6 +181,7 @@ return {
 
   {
     "debugloop/telescope-undo.nvim",
+    event = "VeryLazy",
     dependencies = { -- note how they're inverted to above example
       {
         "nvim-telescope/telescope.nvim",
@@ -189,7 +192,11 @@ return {
       -- don't use `defaults = { }` here, do this in the main telescope spec
       extensions = {
         undo = {
-          -- telescope-undo.nvim config, see below
+          side_by_side = true,
+          layout_strategy = "vertical",
+          layout_config = {
+            preview_height = 0.8,
+          },
         },
         -- no other extensions here, they can have their own spec too
       },
@@ -238,11 +245,82 @@ return {
   {
     "ggandor/leap.nvim",
     event = "VeryLazy",
+    opts = {
+        -- add any options here
+    }
+  },
+
+  {
+    "kevinhwang91/nvim-bqf",
+    event = "VeryLazy",
+  },
+
+  {
+    "Wansmer/treesj",
+    keys = {
+      { "<leader>tm", "<cmd>TSJToggle<cr>", desc = "TreeSJ toggle" },
+      { "<leader>tj", "<cmd>TSJJoin<cr>", desc = "TreeSJ join" },
+      { "<leader>ts", "<cmd>TSJSplit<cr>", desc = "TreeSJ split" },
+    },
+    dependencies = { 'nvim-treesitter/nvim-treesitter' }, -- if you install parsers with `nvim-treesitter`
+    opts = { use_default_keymaps = false }
+  },
+
+  {
+    "dstein64/vim-startuptime",
+    event = "VeryLazy",
+  },
+
+  {
+    "ggandor/leap.nvim",
     opts = function()
       vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap-forward)")
       vim.keymap.set({ "n", "x", "o" }, "S", "<Plug>(leap-backward)")
       vim.keymap.set({ "n", "x", "o" }, "gs", "<Plug>(leap-from-window)")
       require("leap").opts.equivalence_classes = { " \t\r\n", "([{", ")]}", "'\"`" }
     end,
+  },
+
+  {
+    "monaqa/dial.nvim",
+    keys = { "<C-a>", { "<C-x>", mode = "n" } },
+  },
+
+  {
+    "folke/trouble.nvim",
+    opts = {}, -- for default options, refer to the configuration section for custom setup.
+    cmd = "Trouble",
+    keys = {
+      {
+        "<leader>xx",
+        "<cmd>Trouble diagnostics toggle<cr>",
+        desc = "Diagnostics (Trouble)",
+      },
+      {
+        "<leader>xX",
+        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+        desc = "Buffer Diagnostics (Trouble)",
+      },
+      {
+        "<leader>cs",
+        "<cmd>Trouble symbols toggle focus=false<cr>",
+        desc = "Symbols (Trouble)",
+      },
+      {
+        "<leader>cl",
+        "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+        desc = "LSP Definitions / references / ... (Trouble)",
+      },
+      {
+        "<leader>xL",
+        "<cmd>Trouble loclist toggle<cr>",
+        desc = "Location List (Trouble)",
+      },
+      {
+        "<leader>xQ",
+        "<cmd>Trouble qflist toggle<cr>",
+        desc = "Quickfix List (Trouble)",
+      },
+    },
   },
 }

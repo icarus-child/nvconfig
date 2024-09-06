@@ -15,6 +15,8 @@ map("n", "<leader>gv", "<cmd>BlameToggle virtual<CR>", { desc = "Git blame virtu
 map("n", "<Tab>", "<Tab>", {noremap = true})
 
 map("i", "jk", "<ESC>")
+map("n", "<leader>x", "<leader>x", {noremap = true})
+map("n", "<leader>xb", "<cmd>bd<CR>", { desc = "Delete buffer" })
 
 map("n", "<leader>e", "<cmd>Oil --float<CR>", { desc = "Floating Oil Window" })
 map("n", "<C-n>", "<cmd>Oil<CR>", { desc = "Oil Window" })
