@@ -261,4 +261,14 @@ return {
   {
     "dstein64/vim-startuptime"
   },
+
+  {
+    "ggandor/leap.nvim",
+    opts = function()
+      vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap-forward)")
+      vim.keymap.set({ "n", "x", "o" }, "S", "<Plug>(leap-backward)")
+      vim.keymap.set({ "n", "x", "o" }, "gs", "<Plug>(leap-from-window)")
+      require("leap").opts.equivalence_classes = { " \t\r\n", "([{", ")]}", "'\"`" }
+    end,
+  },
 }
