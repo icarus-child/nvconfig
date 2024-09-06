@@ -233,4 +233,32 @@ return {
       end, { desc = "Trigger linting for current file" })
     end,
   },
+
+  {
+    "numToStr/Comment.nvim",
+    event = "VeryLazy",
+    opts = {
+        -- add any options here
+    }
+  },
+
+  {
+    "kevinhwang91/nvim-bqf",
+    event = "VeryLazy",
+  },
+
+  {
+    "Wansmer/treesj",
+    keys = {
+      { "<leader>tm", "<cmd>TSJToggle<cr>", desc = "TreeSJ toggle" },
+      { "<leader>tj", "<cmd>TSJJoin<cr>", desc = "TreeSJ join" },
+      { "<leader>ts", "<cmd>TSJSplit<cr>", desc = "TreeSJ split" },
+    },
+    dependencies = { 'nvim-treesitter/nvim-treesitter' }, -- if you install parsers with `nvim-treesitter`
+    opts = { use_default_keymaps = false }
+  },
+
+  {
+    "dstein64/vim-startuptime"
+  },
 }
