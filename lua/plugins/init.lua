@@ -53,6 +53,7 @@ return {
         "prettier",
         "prettierd",
         "bash-language-server",
+        "beautysh",
         "tsserver",
         -- "eslint-lsp",
         "python-lsp-server",

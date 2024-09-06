@@ -6,6 +6,9 @@ local options = {
     javascript = { "prettierd", "prettier", stop_after_first = true },
     typescript = { "prettierd", "prettier", stop_after_first = true },
     gdscript = { "gdformat" },
+    bash = { "beautysh" },
+    sh = { "beautysh" },
+    zsh = { "beautysh" },
   },
 }
 
@@ -14,6 +17,6 @@ require("conform").setup(options)
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*",
   callback = function(args)
-    require("conform").format({ bufnr = args.buf })
+    require("conform").format { bufnr = args.buf }
   end,
 })
