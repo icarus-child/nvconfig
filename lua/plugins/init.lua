@@ -182,7 +182,7 @@ return {
   {
     "debugloop/telescope-undo.nvim",
     event = "VeryLazy",
-    dependencies = { -- note how they're inverted to above example
+    dependencies = {
       {
         "nvim-telescope/telescope.nvim",
         dependencies = { "nvim-lua/plenary.nvim" },
@@ -249,6 +249,7 @@ return {
 
   {
     "Wansmer/treesj",
+    event = "VeryLazy",
     keys = {
       { "<leader>tm", "<cmd>TSJToggle<cr>", desc = "TreeSJ toggle" },
       { "<leader>tj", "<cmd>TSJJoin<cr>", desc = "TreeSJ join" },
@@ -265,6 +266,7 @@ return {
 
   {
     "ggandor/leap.nvim",
+    event = "VeryLazy",
     opts = function()
       vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap-forward)")
       vim.keymap.set({ "n", "x", "o" }, "S", "<Plug>(leap-backward)")
@@ -275,11 +277,13 @@ return {
 
   {
     "monaqa/dial.nvim",
+    event = "VeryLazy",
     keys = { "<C-a>", { "<C-x>", mode = "n" } },
   },
 
   {
     "folke/trouble.nvim",
+    event = "VeryLazy",
     opts = {}, -- for default options, refer to the configuration section for custom setup.
     cmd = "Trouble",
     keys = {
