@@ -45,22 +45,7 @@ return {
   {
     "williamboman/mason.nvim",
     opts = {
-      ensure_installed = {
-        "lua-language-server",
-        "stylua",
-        "html-lsp",
-        "css-lsp",
-        "prettier",
-        "prettierd",
-        "bash-language-server",
-        "beautysh",
-        "tsserver",
-        -- "eslint-lsp",
-        "python-lsp-server",
-        "gdtoolkit",
-        "clang-format",
-        "clangd",
-      },
+      install_root_dir = "D:\\MasonInstalls",
     },
   },
 
@@ -318,5 +303,25 @@ return {
         desc = "Quickfix List (Trouble)",
       },
     },
+  },
+
+  {
+    "mfussenegger/nvim-jdtls",
+    event = "VeryLazy",
+  },
+
+  {
+    "ray-x/go.nvim",
+    dependencies = { -- optional packages
+      "ray-x/guihua.lua",
+      "neovim/nvim-lspconfig",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = function()
+      require("go").setup()
+    end,
+    event = { "CmdlineEnter" },
+    ft = { "go", "gomod" },
+    build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
   },
 }
