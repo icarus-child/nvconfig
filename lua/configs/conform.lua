@@ -12,6 +12,7 @@ local options = {
     c = { "clang-format" },
     cpp = { "clang-format" },
     go = { "gofumpt" },
+    templ = { "templ" },
   },
 }
 
