@@ -324,4 +324,15 @@ return {
     ft = { "go", "gomod" },
     build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
   },
+
+  {
+    "vyfor/cord.nvim",
+    build = "./build || .\\build",
+    event = "VeryLazy",
+    opts = {
+      lsp = {
+        show_problem_count = true,
+      },
+    },
+  },
 }
