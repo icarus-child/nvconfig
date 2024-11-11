@@ -75,7 +75,7 @@ return {
     "nvim-neorg/neorg",
     dependencies = { "luarocks.nvim" },
     version = "*",
-    lazy = true,
+    event = "VeryLazy",
     config = function()
       require "configs.neorg"
     end,
