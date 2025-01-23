@@ -44,9 +44,6 @@ return {
 
   {
     "williamboman/mason.nvim",
-    opts = {
-      install_root_dir = "D:\\MasonInstalls",
-    },
   },
 
   {
@@ -327,12 +324,17 @@ return {
 
   {
     "vyfor/cord.nvim",
-    build = "./build || .\\build",
-    event = "VeryLazy",
-    opts = {
-      lsp = {
-        show_problem_count = true,
-      },
-    },
+    branch = "client-server",
+    build = ":Cord update",
+    opts = {}, -- calls require('cord').setup()
+  },
+
+  {
+    "lervag/vimtex",
+    lazy = false, -- we don't want to lazy load VimTeX
+    -- tag = "v2.15", -- uncomment to pin to a specific release
+    init = function()
+      require "configs.vimtex"
+    end,
   },
 }

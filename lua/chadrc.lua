@@ -14,7 +14,7 @@ M.mason = {
     "prettierd",
     "bash-language-server",
     "beautysh",
-    "tsserver",
+    "typescript-language-server",
     -- "eslint-lsp",
     "python-lsp-server",
     "gdtoolkit",
@@ -23,7 +23,7 @@ M.mason = {
   },
 }
 
-M.ui = {
+M.base46 = {
   theme = "ayu_light",
   transparency = false,
 
@@ -85,6 +85,9 @@ M.ui = {
       },
     },
   },
+}
+
+M.ui = {
 
   tabufline = {
     enabled = false,
@@ -108,11 +111,11 @@ M.ui = {
     --     end
     --     local linters = lint.get_running()
     --     if #linters == 0 then
-    --         return " 󰦕 No Linter "
+    --       return " 󰦕 No Linter "
     --     end
     --     return "󱉶 " .. table.concat(linters, ", ")
-    --   end
-    -- }
+    --   end,
+    -- },
   },
 }
 
