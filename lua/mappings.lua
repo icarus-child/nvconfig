@@ -12,10 +12,10 @@ map("n", "<leader>gw", "<cmd>BlameToggle window<CR>", { desc = "Git blame window
 map("n", "<leader>gv", "<cmd>BlameToggle virtual<CR>", { desc = "Git blame virtual" })
 
 -- disable tab next buffer, reenable <C-i> next jump list position
-map("n", "<Tab>", "<Tab>", {noremap = true})
+map("n", "<Tab>", "<Tab>", { noremap = true })
 
-map("i", "jk", "<ESC>")
-map("n", "<leader>x", "<leader>x", {noremap = true})
+-- map("i", "jk", "<ESC>")
+map("n", "<leader>x", "<leader>x", { noremap = true })
 map("n", "<leader>xb", "<cmd>bd<CR>", { desc = "Delete buffer" })
 
 map("n", "<leader>e", "<cmd>Oil --float<CR>", { desc = "Floating Oil Window" })
