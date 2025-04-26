@@ -20,7 +20,6 @@ return {
 
   {
     "stevearc/conform.nvim",
-    -- event = 'BufWritePre', -- uncomment for format on save
     opts = require "configs.conform",
   },
 
@@ -335,6 +334,16 @@ return {
     -- tag = "v2.15", -- uncomment to pin to a specific release
     init = function()
       require "configs.vimtex"
+    end,
+  },
+
+  {
+    "github/copilot.vim",
+    event = "VeryLazy",
+    config = function()
+      vim.g.copilot_no_tab_map = true
+      vim.g.copilot_assume_mapped = true
+      vim.keymap.set("i", "<Right>", 'copilot#Accept("<CR>")', { expr = true, silent = true })
     end,
   },
 }

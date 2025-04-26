@@ -23,4 +23,6 @@ map("n", "<C-n>", "<cmd>Oil<CR>", { desc = "Oil Window" })
 
 map("n", "<leader>u", "<cmd>Telescope undo<cr>", { desc = "Undo history" })
 
+map("n", "gr", "<cmd>Telescope lsp_references<cr>", { desc = "LSP References" })
+
 map({ "n", "i" }, "<S-Down>", "")
