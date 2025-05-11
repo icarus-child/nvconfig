@@ -14,6 +14,7 @@ local options = {
     cpp = { "clang-format" },
     go = { "gofumpt" },
     templ = { "templ" },
+    r = { "styler" },
   },
 }
 
