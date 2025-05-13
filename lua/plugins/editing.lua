@@ -8,6 +8,13 @@ return {
     opts = {},
   },
 
+  -- indent based motions
+  -- [=, ]=, etc.
+  {
+    "jeetsukumaran/vim-indentwise",
+    event = "VeryLazy",
+  },
+
   { -- commenting with e.g. `gcc` or `gcip`
     -- respects TS, so it works in quarto documents 'numToStr/Comment.nvim',
     "numToStr/Comment.nvim",
@@ -19,8 +26,9 @@ return {
     config = true,
   },
 
-  { -- format things as tables
+  { -- align text vertically
     "godlygeek/tabular",
+    enabled = false,
   },
 
   { -- generate docstrings
@@ -30,6 +38,7 @@ return {
     config = true,
   },
 
+  -- open links in browser incl. jira tickets, cargo links, etc.
   {
     "chrishrb/gx.nvim",
     enabled = false,
@@ -38,16 +47,12 @@ return {
     init = function()
       vim.g.netrw_nogx = 1 -- disable netrw gx
     end,
-    dependencies = { "nvim-lua/plenary.nvim" },
+    dependencies = { "nvim-lua/plenary.nvim" }, -- Required for Neovim < 0.10.0
+    config = true, -- default settings
     submodules = false, -- not needed, submodules are required only for tests
-    opts = {
-      handler_options = {
-        -- you can select between google, bing, duckduckgo, and ecosia
-        search_engine = "duckduckgo",
-      },
-    },
   },
 
+  -- in-file traversal
   {
     "folke/flash.nvim",
     enabled = false,
@@ -86,6 +91,45 @@ return {
     },
   },
 
+  -- manipulate asdf => { asdf }
+  {
+    "Wansmer/treesj",
+    keys = {
+      { "<leader>tm", "<cmd>TSJToggle<cr>", desc = "[t]reesj [t]oggle" },
+      { "<leader>tj", "<cmd>TSJJoin<cr>", desc = "[t]reesj [j]oin" },
+      { "<leader>ts", "<cmd>TSJSplit<cr>", desc = "[t]reesj [s]plit" },
+    },
+    -- if you install parsers with `nvim-treesitter`
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    opts = { use_default_keymaps = false },
+  },
+
+  -- advanced increment / decrement
+  -- (supports decimals, booleans, dates, etc.)
+  {
+    "monaqa/dial.nvim",
+    keys = {
+      { "<C-a>", "<Plug>(dial-increment)", mode = { "n", "v" } },
+      { "<C-x>", "<Plug>(dial-decrement)", mode = { "n", "v" } },
+      { "g<C-a>", "g<Plug>(dial-increment)", mode = { "n", "v" } },
+      { "g<C-x>", "g<Plug>(dial-decrement)", mode = { "n", "v" } },
+    },
+  },
+
+  -- in-file traversal
+  -- lazy loads itself, attempting to lazy load can cause issues
+  {
+    "ggandor/leap.nvim",
+    lazy = false,
+    opts = function()
+      vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap-forward)")
+      vim.keymap.set({ "n", "x", "o" }, "S", "<Plug>(leap-backward)")
+      vim.keymap.set({ "n", "x", "o" }, "gs", "<Plug>(leap-from-window)")
+      require("leap").opts.equivalence_classes = { " \t\r\n", "([{", ")]}", "'\"`" }
+    end,
+  },
+
+  -- file pinning and switching
   {
     "ThePrimeagen/harpoon",
     branch = "harpoon2",
@@ -102,7 +146,7 @@ return {
       {
         "<leader>fn",
         function()
-          require("harpoon").ui:toggle_quick_menu(harpoon:list())
+          require("harpoon").ui:toggle_quick_menu(require("harpoon"):list())
         end,
         { desc = "toggle harpoon menu" },
       },

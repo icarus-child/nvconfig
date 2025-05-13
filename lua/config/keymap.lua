@@ -2,10 +2,6 @@
 local wk = require "which-key"
 local ms = vim.lsp.protocol.Methods
 
-P = vim.print
-
-vim.g["reticulate_running"] = false
-
 local nmap = function(key, effect, desc)
   vim.keymap.set("n", key, effect, { silent = true, noremap = true, desc = desc })
 end
@@ -21,6 +17,9 @@ end
 local cmap = function(key, effect, desc)
   vim.keymap.set("c", key, effect, { silent = true, noremap = true, desc = desc })
 end
+
+-- unbind
+vim.keymap.del("n", "<CR>")
 
 -- select last paste
 nmap("gV", "`[v`]", "select last paste")
@@ -165,8 +164,9 @@ wk.add({
     { "<leader>cr", new_terminal_r, desc = "new [R] terminal" },
     { "<leader>d", group = "[d]ebug" },
     { "<leader>dt", group = "[t]est" },
-    { "<leader>e", group = "[e]dit" },
-    { "<leader>e", group = "[t]mux" },
+    { "<leader>t", group = "[t]abby / [t]reesj" },
+    -- { "<leader>e", group = "[e]dit" },
+    -- { "<leader>e", group = "[t]mux" },
     { "<leader>fd", [[eval "$(tmux showenv -s DISPLAY)"]], desc = "[d]isplay fix" },
     { "<leader>f", group = "[f]ind (telescope)" },
     { "<leader>f<space>", "<cmd>Telescope buffers<cr>", desc = "[ ] buffers" },
@@ -219,7 +219,7 @@ wk.add({
     },
     { "<leader>lde", vim.diagnostic.enable, desc = "[e]nable" },
     { "<leader>le", vim.diagnostic.open_float, desc = "diagnostics (show hover [e]rror)" },
-    { "<leader>lg", ":Neogen<cr>", desc = "neo[g]en docstring" },
+    { "<leader>ln", ":Neogen<cr>", desc = "[n]eogen docstring" },
     { "<leader>o", group = "[o]tter & c[o]de" },
     { "<leader>ob", insert_bash_chunk, desc = "[b]ash code chunk" },
     { "<leader>oc", "O# %%<cr>", desc = "magic [c]omment code chunk # %%" },

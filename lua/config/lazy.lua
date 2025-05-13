@@ -25,7 +25,7 @@ require("lazy").setup("plugins", {
   },
   install = {
     missing = true,
-    colorscheme = { "default" },
+    colorscheme = { "tokyonight" },
   },
   checker = { enabled = false },
   performance = {
@@ -33,7 +33,7 @@ require("lazy").setup("plugins", {
       disabled_plugins = {
         "gzip",
         "matchit",
-        "matchparen",
+        -- "matchparen",
         -- 'netrwPlugin',
         "tarPlugin",
         "tohtml",

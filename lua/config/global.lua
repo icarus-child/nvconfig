@@ -112,7 +112,7 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
 })
 
 -- scroll before end of window
-vim.opt.scrolloff = 5
+vim.opt.scrolloff = 2
 
 -- (don't == 0) replace certain elements with prettier ones
 vim.opt.conceallevel = DefaultConcealLevel
@@ -138,6 +138,7 @@ vim.filetype.add {
 vim.cmd.packadd "cfilter"
 
 -- to enable cursorline
+vim.opt.cursorline = true
 vim.opt.cursorlineopt = "both"
 
 -- fixes changing every file I open for git commits

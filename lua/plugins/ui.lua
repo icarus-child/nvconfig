@@ -35,13 +35,25 @@ return {
     end,
   },
 
-  { -- nice quickfix list
+  -- toggle vim numbers
+  {
+    "jeffkreeftmeijer/vim-numbertoggle",
+    event = "VeryLazy",
+  },
+
+  -- nice quickfix list
+  {
     "stevearc/quicker.nvim",
+    enabled = false,
     event = "FileType qf",
     opts = {
       winfixheight = false,
       wrap = true,
     },
+  },
+  {
+    "kevinhwang91/nvim-bqf",
+    event = "FileType qf",
   },
 
   -- telescope
@@ -204,9 +216,16 @@ return {
     end,
   },
 
-  { -- nicer-looking tabs with close icons
+  -- tab line visual upgrade and hotkey traversal
+  {
     "nanozuki/tabby.nvim",
-    enabled = false,
+    lazy = false,
+    enabled = true,
+    keys = {
+      { "<leader>tr", "<cmd>Tabby rename_tab<cr>", desc = "[t]abby [r]ename tab" }, -- TODO: spawn rename window
+      { "<leader>tw", "<cmd>Tabby pick_window<cr>", desc = "[t]abby pick [w]indow" },
+      { "<leader>tT", "<cmd>Tabby jump_to_tab<cr>", desc = "tabby [j]ump" },
+    },
     config = function()
       require("tabby.tabline").use_preset "tab_only"
     end,
@@ -216,7 +235,7 @@ return {
     "hedyhli/outline.nvim",
     cmd = "Outline",
     keys = {
-      { "<leader>lo", ":Outline<cr>", desc = "symbols outline" },
+      { "<leader>lo", ":Outline<cr>", desc = "symbols [o]utline" },
     },
     opts = {
       providers = {

@@ -113,7 +113,6 @@ return {
 
   {
     "kdheepak/lazygit.nvim",
-    event = "VeryLazy",
     cmd = {
       "LazyGit",
       "LazyGitConfig",
@@ -229,7 +228,7 @@ return {
 
   {
     "kevinhwang91/nvim-bqf",
-    event = "VeryLazy",
+    event = "FileType qf",
   },
 
   {

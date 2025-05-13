@@ -6,6 +6,7 @@ return {
     dev = false,
     priority = 1000,
     lazy = false,
+    -- TODO: look into these more
     ---@type snacks.Config
     opts = {
       styles = {},
@@ -14,6 +15,15 @@ return {
       picker = {},
       indent = {},
       notifier = {},
+    },
+    keys = {
+      {
+        "<leader>vn",
+        function()
+          require("snacks").notifier.show_history()
+        end,
+        desc = "[n]otifier history",
+      },
     },
   },
   {
