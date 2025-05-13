@@ -4,8 +4,9 @@ return {
     -- event = "User FilePost",
     lazy = false,
     dependencies = {
-      { -- nice loading notifications
-        -- PERF: but can slow down startup
+      -- nice loading notifications
+      -- PERF: but can slow down startup
+      {
         "j-hui/fidget.nvim",
         enabled = false,
         opts = {},

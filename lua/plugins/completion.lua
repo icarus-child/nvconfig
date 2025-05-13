@@ -8,7 +8,8 @@ return {
     end,
   },
 
-  { -- new completion plugin
+  -- new completion plugin
+  {
     "saghen/blink.cmp",
     event = "InsertEnter",
     enabled = true,
@@ -90,7 +91,8 @@ return {
     },
   },
 
-  { -- gh copilot
+  -- gh copilot
+  {
     "zbirenbaum/copilot.lua",
     enabled = true,
     event = "InsertEnter",
@@ -114,7 +116,8 @@ return {
     end,
   },
 
-  { -- LLMs
+  -- LLMs
+  {
     "olimorris/codecompanion.nvim",
     version = "*",
     enabled = false,

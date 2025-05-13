@@ -1,5 +1,4 @@
 return {
-
   -- add/delete/change can be done with the keymaps
   -- ys{motion}{char}, ds{char}, and cs{target}{replacement}
   {
@@ -15,7 +14,8 @@ return {
     event = "VeryLazy",
   },
 
-  { -- commenting with e.g. `gcc` or `gcip`
+  -- commenting with e.g. `gcc` or `gcip`
+  {
     -- respects TS, so it works in quarto documents 'numToStr/Comment.nvim',
     "numToStr/Comment.nvim",
     version = nil,
@@ -26,12 +26,14 @@ return {
     config = true,
   },
 
-  { -- align text vertically
+  -- align text vertically
+  {
     "godlygeek/tabular",
     enabled = false,
   },
 
-  { -- generate docstrings
+  -- generate docstrings
+  {
     "danymat/neogen",
     cmd = { "Neogen" },
     dependencies = "nvim-treesitter/nvim-treesitter",

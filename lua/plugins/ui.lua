@@ -1,5 +1,6 @@
 return {
-  { -- edit the file system as a buffer
+  -- edit the file system as a buffer
+  {
     "stevearc/oil.nvim",
     opts = {
       keymaps = {
@@ -176,14 +177,16 @@ return {
     end,
   },
 
-  { -- Highlight todo, notes, etc in comments
+  -- Highlight todo, notes, etc in comments
+  {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = { signs = false },
   },
 
-  { -- statusline
-    -- PERF: I found this to slow down the editor
+  -- statusline
+  -- PERF: I found this to slow down the editor
+  {
     "nvim-lualine/lualine.nvim",
     enabled = true,
     config = function()
@@ -231,7 +234,8 @@ return {
     end,
   },
 
-  { -- show tree of symbols in the current file
+  -- show tree of symbols in the current file
+  {
     "hedyhli/outline.nvim",
     cmd = "Outline",
     keys = {
@@ -253,7 +257,8 @@ return {
     },
   },
 
-  { -- or show symbols in the current file as breadcrumbs
+  -- or show symbols in the current file as breadcrumbs
+  {
     "Bekaboo/dropbar.nvim",
     enabled = false,
     dependencies = {
@@ -266,7 +271,8 @@ return {
     end,
   },
 
-  { -- show diagnostics list
+  -- show diagnostics list
+  {
     -- PERF: Slows down insert mode if open and there are many diagnostics
     "folke/trouble.nvim",
     enabled = false,
@@ -284,7 +290,8 @@ return {
     end,
   },
 
-  { -- highlight markdown headings and code blocks etc.
+  -- highlight markdown headings and code blocks etc.
+  {
     "MeanderingProgrammer/render-markdown.nvim",
     enabled = true,
     -- ft = {'quarto', 'markdown'},

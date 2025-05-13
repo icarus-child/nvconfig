@@ -60,7 +60,8 @@ return {
     end,
   },
 
-  { -- github PRs and the like with gh - cli
+  -- github PRs and the like with gh - cli
+  {
     "pwntester/octo.nvim",
     enabled = true,
     cmd = "Octo",
@@ -71,6 +72,7 @@ return {
     end,
   },
 
+  -- TODO: fix esc breaking lazygit
   {
     "kdheepak/lazygit.nvim",
     cmd = {
@@ -90,5 +92,4 @@ return {
       { "<leader>lg", "<cmd>LazyGit<cr>", desc = "[l]azy[g]it" },
     },
   },
-
 }
