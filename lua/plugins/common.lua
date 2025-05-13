@@ -59,6 +59,7 @@ return {
         "clang-format",
         "gofumpt",
         "styler",
+        "gdtoolkit",
       },
     },
   },

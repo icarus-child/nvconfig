@@ -28,6 +28,14 @@ require("lazy").setup("plugins", {
     colorscheme = { "tokyonight" },
   },
   checker = { enabled = false },
+  ui = {
+    icons = {
+      ft = "",
+      lazy = "󰂠 ",
+      loaded = "",
+      not_loaded = "",
+    },
+  },
   performance = {
     rtp = {
       disabled_plugins = {
