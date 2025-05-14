@@ -60,6 +60,10 @@ return {
         "gofumpt",
         "styler",
         "gdtoolkit",
+
+        -- debugger
+        "bash-debug-adapter",
+        "debugpy",
       },
     },
   },
