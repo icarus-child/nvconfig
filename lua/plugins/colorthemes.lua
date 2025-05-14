@@ -1,8 +1,10 @@
 return {
   -- color themes
+
+  -- tokeyonight
   {
     "folke/tokyonight.nvim",
-    enabled = true,
+    enabled = false,
     lazy = false,
     priority = 1000,
     opts = {
@@ -24,6 +26,15 @@ return {
       dim_inactive = false,
       lualine_bold = false,
     },
+  },
+
+  -- dawnfox
+  -- terafox
+  {
+    "EdenEast/nightfox.nvim",
+    enabled = true,
+    lazy = false,
+    priority = 1000,
   },
 
   -- color html colors

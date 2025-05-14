@@ -25,7 +25,7 @@ require("lazy").setup("plugins", {
   },
   install = {
     missing = true,
-    colorscheme = { "tokyonight" },
+    colorscheme = { "dawnfox" },
   },
   checker = { enabled = false },
   ui = {
