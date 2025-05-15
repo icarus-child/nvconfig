@@ -8,7 +8,7 @@ return {
       -- PERF: but can slow down startup
       {
         "j-hui/fidget.nvim",
-        enabled = false,
+        enabled = true,
         opts = {},
       },
     },
@@ -33,7 +33,7 @@ return {
           map("gD", vim.lsp.buf.type_definition, "[g]o to type [D]efinition")
           map("gr", vim.lsp.buf.references, "[g]o to [r]eferences")
           map("<leader>lq", vim.diagnostic.setqflist, "diagnostic [q]uickfix")
-          map("<leader>lc", vim.lsp.buf.code_action, "[c]ode action")
+          map("<leader>ca", vim.lsp.buf.code_action, "[c]ode [a]ction")
         end,
       })
 
