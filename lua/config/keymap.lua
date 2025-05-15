@@ -18,7 +18,7 @@ local cmap = function(key, effect, desc)
 end
 
 -- unbind
-vim.keymap.del("n", "<CR>")
+-- vim.keymap.del("n", "<CR>")
 
 -- select last paste
 nmap("gV", "`[v`]", "select last paste")
@@ -27,8 +27,8 @@ nmap("gV", "`[v`]", "select last paste")
 cmap("<C-a>", "<Home>")
 
 -- save with ctrl+s
-imap("<C-s>", "<esc>:update<cr><esc>", "save")
-nmap("<C-s>", "<cmd>:update<cr><esc>", "save")
+imap("<C-s>", "<esc><cmd>update<cr>a", "save")
+nmap("<C-s>", "<cmd>update<cr>", "save")
 
 -- Move between windows using <ctrl> direction
 nmap("<C-j>", "<C-W>j")
@@ -41,6 +41,12 @@ nmap("<S-Up>", "<cmd>resize +2<CR>")
 nmap("<S-Down>", "<cmd>resize -2<CR>")
 nmap("<S-Left>", "<cmd>vertical resize -2<CR>")
 nmap("<S-Right>", "<cmd>vertical resize +2<CR>")
+
+-- Move in edit mode with hjkl
+imap("<C-h>", "<Left>", "move left")
+imap("<C-j>", "<Down>", "move down")
+imap("<C-k>", "<Up>", "move up")
+imap("<C-l>", "<Right>", "move right")
 
 -- Add undo break-points
 imap(",", ",<c-g>u")
@@ -72,8 +78,10 @@ nmap("L", "<cmd>tabnext<cr>", "next tab")
 local function toggle_light_dark_theme()
   if vim.o.background == "light" then
     vim.o.background = "dark"
+    vim.cmd.colorscheme = "terafox"
   else
     vim.o.background = "light"
+    vim.cmd.colorscheme = "dawnfox"
   end
 end
 
@@ -84,16 +92,13 @@ end
 -- normal mode
 wk.add({
   { "<c-LeftMouse>", "<cmd>lua vim.lsp.buf.definition()<CR>", desc = "go to definition" },
-  { "<c-q>", "<cmd>q<cr>", desc = "close buffer" },
   { "<esc>", "<cmd>noh<cr>", desc = "remove search highlight" },
-  { "[q", ":silent cprev<cr>", desc = "[q]uickfix prev" },
-  { "]q", ":silent cnext<cr>", desc = "[q]uickfix next" },
-  { "gN", "Nzzzv", desc = "center search" },
-  { "gf", ":e <cfile><CR>", desc = "edit file" },
+  { "[q", "<cmd>silent cprev<cr>", desc = "[q]uickfix prev" },
+  { "]q", "<cmd>silent cnext<cr>", desc = "[q]uickfix next" },
   { "gl", "<c-]>", desc = "open help link" },
-  { "n", "nzzzv", desc = "center search" },
-  { "z?", ":setlocal spell!<cr>", desc = "toggle [z]pellcheck" },
-  { "zl", ":Telescope spell_suggest<cr>", desc = "[l]ist spelling suggestions" },
+  { "z?", "<cmd>setlocal spell!<cr>", desc = "toggle [z]pellcheck" },
+  { "zl", "<cmd>Telescope spell_suggest<cr>", desc = "[l]ist spelling suggestions" },
+  { "vih", "<cmd>Gitsigns select_hunk<cr>", desc = "select git [h]unk" },
 }, { mode = "n", silent = true })
 
 -- visual mode
@@ -103,7 +108,7 @@ wk.add {
     { ".", ":norm .<cr>", desc = "repat last normal mode command" },
     { "<M-j>", ":m'>+<cr>`<my`>mzgv`yo`z", desc = "move line down" },
     { "<M-k>", ":m'<-2<cr>`>my`<mzgv`yo`z", desc = "move line up" },
-    { "q", ":norm @q<cr>", desc = "repat q macro" },
+    { "q", ":norm @q<cr>", desc = "repeat q macro" },
   },
 }
 
@@ -137,10 +142,12 @@ end
 wk.add({
   {
     { "<leader>c", group = "[c]ode / [c]ell / [c]hunk" },
+    { "<leader>ct", "<cmd>TodoQuickFix<cr>", desc = "open [T]ODO comment list" },
     { "<leader>d", group = "[d]ebug" },
     { "<leader>dt", group = "[t]est" },
     { "<leader>t", group = "[t]abby / [t]reesj" },
     { "<leader>tn", "<cmd>tabnew<CR>", desc = "[n]ew tab" },
+    { "<leader>tc", "<cmd>tabclose<CR>", desc = "[c]lose tab" },
     -- { "<leader>e", group = "[e]dit" },
     -- { "<leader>e", group = "[t]mux" },
     { "<leader>fd", [[eval "$(tmux showenv -s DISPLAY)"]], desc = "[d]isplay fix" },
@@ -158,15 +165,17 @@ wk.add({
     { "<leader>fm", "<cmd>Telescope marks<cr>", desc = "[m]arks" },
     { "<leader>fq", "<cmd>Telescope quickfix<cr>", desc = "[q]uickfix" },
     { "<leader>g", group = "[g]it" },
-    { "<leader>gb", group = "[b]lame" },
-    { "<leader>gbb", ":GitBlameToggle<cr>", desc = "[b]lame toggle virtual text" },
-    { "<leader>gbc", ":GitBlameCopyCommitURL<cr>", desc = "[c]opy" },
-    { "<leader>gbo", ":GitBlameOpenCommitURL<cr>", desc = "[o]pen" },
-    { "<leader>gc", ":GitConflictRefresh<cr>", desc = "[c]onflict" },
+    { "<leader>gb", "<cmd>BlameToggle window<cr>", desc = "[b]lame toggle window" },
+    { "<leader>gv", "<cmd>BlameToggle virtual<cr>", desc = "blame toggle [v]irtual" },
+    { "<leader>gc", "<cmd>GitConflictRefresh<cr>", desc = "[c]onflict" },
     { "<leader>gd", group = "[d]iff" },
-    { "<leader>gdc", ":DiffviewClose<cr>", desc = "[c]lose" },
-    { "<leader>gdo", ":DiffviewOpen<cr>", desc = "[o]pen" },
-    { "<leader>gs", ":Gitsigns<cr>", desc = "git [s]igns" },
+    { "<leader>gdc", "<cmd>DiffviewClose<cr>", desc = "[c]lose" },
+    { "<leader>gdo", "<cmd>DiffviewOpen<cr>", desc = "[o]pen" },
+    { "<leader>gdh", "<cmd>DiffviewFileHistory<cr>", desc = "[h]istory" },
+    { "<leader>gs", group = "git [s]igns" },
+    { "<leader>gsr", "<cmd>Gitsigns reset_hunk<cr>", desc = "[r]eset hunk" },
+    { "<leader>gsp", "<cmd>Gitsigns preview_hunk_inline<cr>", desc = "[p]review hunk" },
+    { "<leader>gsr", "<cmd>Gitsigns reset_hunk<cr>", desc = "[r]eset hunk" },
     { "<leader>gw", group = "[w]orktree" },
     -- NOTE: git worktree not installed
     {

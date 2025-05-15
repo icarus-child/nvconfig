@@ -146,5 +146,8 @@ vim.cmd.packadd "cfilter"
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "both"
 
+-- session save
+vim.opt.sessionoptions = "curdir,folds,globals,help,tabpages,terminal,winsize"
+
 -- fixes changing every file I open for git commits
 -- vim.opt.fixendofline = false

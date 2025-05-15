@@ -23,8 +23,8 @@ return {
 
   {
     "lewis6991/gitsigns.nvim",
+    lazy = false,
     enabled = true,
-    event = "User FilePost",
     opts = {},
   },
 
@@ -33,9 +33,16 @@ return {
     version = "^2.1.0",
     event = "VeryLazy",
     init = function()
+      ---@diagnostic disable-next-line: missing-fields
       require("git-conflict").setup {
-        default_mappings = false,
-        disable_diagnostics = true,
+        default_mappings = true, -- disable buffer local mapping created by this plugin
+        default_commands = true, -- disable commands created by this plugin
+        disable_diagnostics = false, -- This will disable the diagnostics in a buffer whilst it is conflicted
+        list_opener = "copen", -- command or function to open the conflicts list
+        highlights = { -- They must have background color, otherwise the default color will be used
+          incoming = "DiffAdd",
+          current = "DiffText",
+        },
       }
     end,
     keys = {
@@ -49,15 +56,11 @@ return {
   },
 
   {
-    "f-person/git-blame.nvim",
-    event = "User FilePost",
-    init = function()
-      require("gitblame").setup {
-        enabled = false,
-      }
-      vim.g.gitblame_display_virtual_text = 1
-      -- vim.g.gitblame_enabled = 0
+    "FabijanZulj/blame.nvim",
+    config = function()
+      require("blame").setup {}
     end,
+    cmd = "BlameToggle",
   },
 
   -- github PRs and the like with gh - cli

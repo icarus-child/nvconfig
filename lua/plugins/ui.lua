@@ -10,17 +10,17 @@ return {
 
         ["q"] = "actions.close",
         ["<C-n>"] = "actions.close",
-        ["<C-m>"] = "actions.close",
       },
+      use_default_keymaps = true,
       view_options = {
         show_hidden = true,
       },
-      skip_confirm_for_simple_edits = false,
+      skip_confirm_for_simple_edits = true,
     },
     dependencies = { "nvim-tree/nvim-web-devicons" },
     keys = {
       { "<C-n>", "<CMD>Oil --preview<CR>", desc = "oil with preview" },
-      { "<C-m>", "<CMD>Oil<CR>", desc = "oil no preview" },
+      { "<M-n>", "<CMD>Oil<CR>", desc = "oil without preview" },
     },
     cmd = "Oil",
   },
@@ -44,18 +44,11 @@ return {
 
   -- nice quickfix list
   {
-    "stevearc/quicker.nvim",
-    enabled = false,
-    event = "FileType qf",
-    opts = {
-      winfixheight = false,
-      wrap = true,
-    },
-  },
-  {
     "kevinhwang91/nvim-bqf",
     event = "FileType qf",
   },
+
+  { "akinsho/toggleterm.nvim", version = "*", config = true },
 
   -- telescope
   -- a nice seletion UI also to find and open files
@@ -73,6 +66,7 @@ return {
       local new_maker = function(filepath, bufnr, opts)
         opts = opts or {}
         filepath = vim.fn.expand(filepath)
+        ---@diagnostic disable-next-line: undefined-field
         vim.loop.fs_stat(filepath, function(_, stat)
           if not stat then
             return
@@ -180,12 +174,12 @@ return {
   -- Highlight todo, notes, etc in comments
   {
     "folke/todo-comments.nvim",
+    lazy = false,
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = { signs = false },
   },
 
   -- statusline
-  -- PERF: I found this to slow down the editor
   {
     "nvim-lualine/lualine.nvim",
     enabled = true,
@@ -224,13 +218,76 @@ return {
     "nanozuki/tabby.nvim",
     lazy = false,
     enabled = true,
+    cmd = "Tabby",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
     keys = {
-      { "<leader>tr", "<cmd>Tabby rename_tab<cr>", desc = "[t]abby [r]ename tab" }, -- TODO: spawn rename window
       { "<leader>tw", "<cmd>Tabby pick_window<cr>", desc = "[t]abby pick [w]indow" },
-      { "<leader>tT", "<cmd>Tabby jump_to_tab<cr>", desc = "tabby [j]ump" },
+      { "<leader>tt", "<cmd>Tabby jump_to_tab<cr>", desc = "tabby [j]ump" },
     },
     config = function()
+      local function open_rename_prompt()
+        vim.ui.input({ prompt = "Rename tab: " }, function(input)
+          vim.cmd("Tabby rename_tab " .. input)
+        end)
+      end
+
+      vim.keymap.set(
+        "n",
+        "<leader>tr",
+        open_rename_prompt,
+        { silent = true, noremap = true, desc = "[t]abby [r]ename tab" }
+      )
+
+      vim.o.showtabline = 2
       require("tabby.tabline").use_preset "tab_only"
+
+      local theme = {
+        fill = "TabLineFill",
+        -- Also you can do this: fill = { fg='#f2e9de', bg='#907aa9', style='italic' }
+        head = "TabLine",
+        current_tab = "TabLineSel",
+        tab = "TabLine",
+        win = "TabLine",
+        tail = "TabLine",
+      }
+      require("tabby.tabline").set(function(line)
+        return {
+          {
+            { "  ", hl = theme.head },
+            line.sep(" ", theme.head, theme.fill),
+          },
+          line.tabs().foreach(function(tab)
+            local hl = tab.is_current() and theme.current_tab or theme.tab
+            return {
+              line.sep(" ", hl, theme.fill),
+              -- (tab.in_jump_mode() and tab.jump_key()) or (tab.is_current() and " " or "󰆣 "),
+              (tab.in_jump_mode() and tab.jump_key()) or tab.number(),
+              tab.name(),
+              line.sep(" ", hl, theme.fill),
+              hl = hl,
+              margin = " ",
+            }
+          end),
+          line.spacer(),
+          line.wins_in_tab(line.api.get_current_tab()).foreach(function(win)
+            return {
+              line.sep(" ", theme.win, theme.fill),
+              win.is_current() and "+" or " ",
+              win.buf_name(),
+              line.sep(" ", theme.win, theme.fill),
+              hl = theme.win,
+              margin = " ",
+            }
+          end),
+          {
+            line.sep(" ", theme.tail, theme.fill),
+            { "  ", hl = theme.tail },
+          },
+          hl = theme.fill,
+        }
+      end)
     end,
   },
 

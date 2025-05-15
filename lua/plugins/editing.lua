@@ -18,7 +18,7 @@ return {
   {
     -- respects TS, so it works in quarto documents 'numToStr/Comment.nvim',
     "numToStr/Comment.nvim",
-    version = nil,
+    enabled = false,
     cond = function()
       return vim.fn.has "nvim-0.10" == 0
     end,
