@@ -1,6 +1,5 @@
 -- required in which-key plugin spec in plugins/ui.lua as `require 'config.keymap'`
 local wk = require "which-key"
-local ms = vim.lsp.protocol.Methods
 
 local nmap = function(key, effect, desc)
   vim.keymap.set("n", key, effect, { silent = true, noremap = true, desc = desc })
@@ -49,16 +48,16 @@ imap(".", ".<c-g>u")
 imap(";", ";<c-g>u")
 
 -- keep selection after indent/dedent
-vmap(">", ">gv")
-vmap("<", "<gv")
+vmap(">", ">gv", "indent")
+vmap("<", "<gv", "outdent")
 
 -- comment
 vim.keymap.set("n", "<leader>/", "gcc", { desc = "toggle comment", remap = true })
 vim.keymap.set("v", "<leader>/", "gc", { desc = "toggle comment", remap = true })
 
 -- center after search and jumps
-nmap("n", "nzz")
-nmap("N", "Nzz")
+nmap("n", "nzz", "next match")
+nmap("N", "Nzz", "prev match")
 -- nmap('<c-d>', '<c-d>zz')
 -- nmap('<c-u>', '<c-u>zz')
 
@@ -67,8 +66,8 @@ nmap("<c-h>", "<c-w>h")
 nmap("<c-l>", "<c-w>l")
 nmap("<c-j>", "<c-w>j")
 nmap("<c-k>", "<c-w>k")
--- nmap('H', '<cmd>tabprevious<cr>')
--- nmap('L', '<cmd>tabnext<cr>')
+nmap("H", "<cmd>tabprevious<cr>", "prev tab")
+nmap("L", "<cmd>tabnext<cr>", "next tab")
 
 local function toggle_light_dark_theme()
   if vim.o.background == "light" then
@@ -78,7 +77,7 @@ local function toggle_light_dark_theme()
   end
 end
 
---show kepbindings with whichkey
+--show keybindings with whichkey
 --add your own here if you want them to
 --show up in the popup as well
 
@@ -124,26 +123,6 @@ wk.add({
   },
 }, { mode = "i" })
 
-local function new_terminal(lang)
-  vim.cmd("vsplit term://" .. lang)
-end
-
-local function new_terminal_python()
-  new_terminal "python"
-end
-
-local function new_terminal_r()
-  new_terminal "R --no-save"
-end
-
-local function new_terminal_ipython()
-  new_terminal "ipython --no-confirm-exit --no-autoindent"
-end
-
-local function new_terminal_shell()
-  new_terminal "$SHELL"
-end
-
 local function toggle_conceal()
   local lvl = vim.o.conceallevel
   if lvl > DefaultConcealLevel then
@@ -158,13 +137,10 @@ end
 wk.add({
   {
     { "<leader>c", group = "[c]ode / [c]ell / [c]hunk" },
-    { "<leader>ci", new_terminal_ipython, desc = "new [i]python terminal" },
-    { "<leader>cn", new_terminal_shell, desc = "[n]ew terminal with shell" },
-    { "<leader>cp", new_terminal_python, desc = "new [p]ython terminal" },
-    { "<leader>cr", new_terminal_r, desc = "new [R] terminal" },
     { "<leader>d", group = "[d]ebug" },
     { "<leader>dt", group = "[t]est" },
     { "<leader>t", group = "[t]abby / [t]reesj" },
+    { "<leader>tn", "<cmd>tabnew<CR>", desc = "[n]ew tab" },
     -- { "<leader>e", group = "[e]dit" },
     -- { "<leader>e", group = "[t]mux" },
     { "<leader>fd", [[eval "$(tmux showenv -s DISPLAY)"]], desc = "[d]isplay fix" },
@@ -174,7 +150,6 @@ wk.add({
     { "<leader>fM", "<cmd>Telescope man_pages<cr>", desc = "[M]an pages" },
     { "<leader>fb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "[b]uffer fuzzy find" },
     { "<leader>fc", "<cmd>Telescope git_commits<cr>", desc = "git [c]ommits" },
-    { "<leader>fd", "<cmd>Telescope buffers<cr>", desc = "[d] buffers" },
     { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "[f]iles" },
     { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "[h]elp" },
     { "<leader>fj", "<cmd>Telescope jumplist<cr>", desc = "[j]umplist" },
@@ -192,6 +167,8 @@ wk.add({
     { "<leader>gdc", ":DiffviewClose<cr>", desc = "[c]lose" },
     { "<leader>gdo", ":DiffviewOpen<cr>", desc = "[o]pen" },
     { "<leader>gs", ":Gitsigns<cr>", desc = "git [s]igns" },
+    { "<leader>gw", group = "[w]orktree" },
+    -- NOTE: git worktree not installed
     {
       "<leader>gwc",
       ":lua require('telescope').extensions.git_worktree.create_git_worktree()<cr>",
@@ -203,10 +180,10 @@ wk.add({
       desc = "worktree switch",
     },
     { "<leader>h", group = "[h]elp / [h]ide / debug" },
-    { "<leader>hc", group = "[c]onceal" },
+    -- { "<leader>hc", group = "[c]onceal" },
     { "<leader>hc", toggle_conceal, desc = "[c]onceal toggle" },
-    { "<leader>ht", group = "[t]reesitter" },
-    { "<leader>htt", vim.treesitter.inspect_tree, desc = "show [t]ree" },
+    -- { "<leader>ht", group = "[t]reesitter" },
+    { "<leader>ht", vim.treesitter.inspect_tree, desc = "show [t]ree" },
     { "<leader>i", group = "[i]mage" },
     { "<leader>l", group = "[l]anguage/lsp" },
     { "<leader>ld", group = "[d]iagnostics" },
@@ -220,13 +197,6 @@ wk.add({
     { "<leader>lde", vim.diagnostic.enable, desc = "[e]nable" },
     { "<leader>le", vim.diagnostic.open_float, desc = "diagnostics (show hover [e]rror)" },
     { "<leader>ln", ":Neogen<cr>", desc = "[n]eogen docstring" },
-    { "<leader>o", group = "[o]tter & c[o]de" },
-    { "<leader>ob", insert_bash_chunk, desc = "[b]ash code chunk" },
-    { "<leader>oc", "O# %%<cr>", desc = "magic [c]omment code chunk # %%" },
-    { "<leader>ol", insert_lua_chunk, desc = "[l]lua code chunk" },
-    { "<leader>oo", insert_ojs_chunk, desc = "[o]bservable js code chunk" },
-    { "<leader>op", insert_py_chunk, desc = "[p]ython code chunk" },
-    { "<leader>or", insert_r_chunk, desc = "[r] code chunk" },
     { "<leader>v", group = "[v]im" },
     { "<leader>vc", ":Telescope colorscheme<cr>", desc = "[c]olortheme" },
     { "<leader>vh", ':execute "h " . expand("<cword>")<cr>', desc = "vim [h]elp for current word" },

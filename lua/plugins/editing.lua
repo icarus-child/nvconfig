@@ -143,14 +143,14 @@ return {
         function()
           require("harpoon"):list():add()
         end,
-        { desc = "[a]dd file to harpoon list" },
+        desc = "[a]dd file to harpoon list",
       },
       {
         "<leader>fn",
         function()
           require("harpoon").ui:toggle_quick_menu(require("harpoon"):list())
         end,
-        { desc = "toggle harpoon menu" },
+        desc = "toggle harpoon menu",
       },
 
       {
@@ -158,28 +158,28 @@ return {
         function()
           require("harpoon"):list():select(1)
         end,
-        { desc = "select harpoon slot 1" },
+        desc = "select harpoon slot 1",
       },
       {
         "<localleader>s",
         function()
           require("harpoon"):list():select(2)
         end,
-        { desc = "select harpoon slot 2" },
+        desc = "select harpoon slot 2",
       },
       {
         "<localleader>d",
         function()
           require("harpoon"):list():select(3)
         end,
-        { desc = "select harpoon slot 3" },
+        desc = "select harpoon slot 3",
       },
       {
         "<localleader>f",
         function()
           require("harpoon"):list():select(4)
         end,
-        { desc = "select harpoon slot 4" },
+        desc = "select harpoon slot 4",
       },
     },
     config = function()

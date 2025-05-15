@@ -94,7 +94,7 @@ return {
   -- gh copilot
   {
     "zbirenbaum/copilot.lua",
-    enabled = true,
+    enabled = false,
     event = "InsertEnter",
     config = function()
       require("copilot").setup {

@@ -1,7 +1,5 @@
 -- global options
 
-local animals = require("misc.style").animals
-
 DefaultConcealLevel = 0
 FullConcealLevel = 3
 
@@ -13,6 +11,12 @@ vim.api.nvim_set_hl(0, "TermCursor", { fg = "#A6E3A1", bg = "#A6E3A1" })
 
 -- disable fill chars (the ~ after the buffer)
 vim.o.fillchars = "eob: "
+
+-- folding
+vim.o.foldenable = true -- enable fold
+vim.o.foldlevel = 99 -- start editing with all folds opened
+vim.o.foldmethod = "expr" -- use tree-sitter for folding method
+vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
 -- more opinionated
 vim.opt.number = true -- show linenumbers
@@ -30,14 +34,17 @@ vim.opt.shortmess:append "A"
 vim.opt.showmode = false
 
 -- use less indentation
-local tabsize = 2
 vim.opt.expandtab = true
-vim.opt.shiftwidth = tabsize
-vim.opt.tabstop = tabsize
+vim.opt.shiftwidth = 0
+vim.opt.tabstop = 2
+
+-- enable persistent undo
+vim.o.undofile = true
+vim.o.undolevels = 10000
 
 -- space as leader
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+vim.g.mapleader = vim.keycode "<space>"
+vim.g.maplocalleader = vim.keycode "\\"
 
 -- smarter search
 vim.opt.ignorecase = true
@@ -58,6 +65,7 @@ vim.opt.signcolumn = "yes:1"
 
 -- how to show autocomplete menu
 vim.opt.completeopt = "menuone,noinsert"
+-- vim.o.completeopt = "menu,menuone,popup,fuzzy"
 
 -- global statusline
 vim.opt.laststatus = 3
@@ -77,10 +85,7 @@ let g:currentmode={
        \}
 ]]
 
-math.randomseed(os.time())
-local i = math.random(#animals)
 vim.opt.statusline = "%{%g:currentmode[mode()]%} %{%reg_recording()%} %* %t | %y | %* %= c:%c l:%l/%L %p%% %#NonText# "
-  .. animals[i]
   .. " %*"
 
 -- hide cmdline when not used

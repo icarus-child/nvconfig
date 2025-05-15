@@ -32,7 +32,8 @@ return {
           map("gd", vim.lsp.buf.definition, "[g]o to [d]efinition")
           map("gD", vim.lsp.buf.type_definition, "[g]o to type [D]efinition")
           map("gr", vim.lsp.buf.references, "[g]o to [r]eferences")
-          map("<leader>lq", vim.diagnostic.setqflist, "[l]sp diagnostic [q]uickfix")
+          map("<leader>lq", vim.diagnostic.setqflist, "diagnostic [q]uickfix")
+          map("<leader>lc", vim.lsp.buf.code_action, "[c]ode action")
         end,
       })
 
