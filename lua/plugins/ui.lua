@@ -225,21 +225,19 @@ return {
     keys = {
       { "<leader>tw", "<cmd>Tabby pick_window<cr>", desc = "[t]abby pick [w]indow" },
       { "<leader>tt", "<cmd>Tabby jump_to_tab<cr>", desc = "tabby [j]ump" },
+      {
+        "<leader>tr",
+        function()
+          vim.ui.input({ prompt = "Rename tab: " }, function(input)
+            if input == nil or input == "" then
+              vim.cmd("Tabby rename_tab " .. input)
+            end
+          end)
+        end,
+        "[t]abby [r]ename tab",
+      },
     },
     config = function()
-      local function open_rename_prompt()
-        vim.ui.input({ prompt = "Rename tab: " }, function(input)
-          vim.cmd("Tabby rename_tab " .. input)
-        end)
-      end
-
-      vim.keymap.set(
-        "n",
-        "<leader>tr",
-        open_rename_prompt,
-        { silent = true, noremap = true, desc = "[t]abby [r]ename tab" }
-      )
-
       vim.o.showtabline = 2
       require("tabby.tabline").use_preset "tab_only"
 
@@ -388,6 +386,59 @@ return {
       signs = {
         enabled = false,
       },
+    },
+  },
+
+  {
+    "rcarriga/nvim-notify",
+    lazy = false,
+    keys = {
+      {
+        "<leader>vn",
+        "<cmd>Telescope notify<cr>",
+        desc = "[n]otifier history",
+      },
+      {
+        "<leader>vd",
+        "<cmd>Telescope notify<cr>",
+        desc = "[d]ismiss notifications",
+      },
+    },
+  },
+
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = {
+      {
+        lsp = {
+          -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+          override = {
+            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+            ["vim.lsp.util.stylize_markdown"] = true,
+            ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+          },
+        },
+        -- you can enable a preset for easier configuration
+        presets = {
+          bottom_search = true, -- use a classic bottom cmdline for search
+          command_palette = false, -- position the cmdline and popupmenu together
+          long_message_to_split = true, -- long messages will be sent to a split
+          inc_rename = false, -- enables an input dialog for inc-rename.nvim
+          lsp_doc_border = true, -- add a border to hover docs and signature help
+        },
+
+        notify = { enabled = false },
+        messages = { enabled = false },
+      },
+    },
+    dependencies = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      "rcarriga/nvim-notify",
     },
   },
 }

@@ -75,9 +75,9 @@ return {
     end,
   },
 
-  -- TODO: fix esc breaking lazygit
   {
     "kdheepak/lazygit.nvim",
+    enabled = false,
     cmd = {
       "LazyGit",
       "LazyGitConfig",

@@ -37,12 +37,30 @@ return {
     ---@type blink.cmp.Config
     opts = {
       keymap = {
-        preset = "enter",
-        ["<c-y>"] = { "show_documentation", "hide_documentation" },
-        ["<c-k>"] = {},
+        preset = "none",
+
+        ["<Tab>"] = {
+          function(cmp)
+            if cmp.is_menu_visible() then
+              return cmp.select_next()
+            elseif cmp.is_ghost_text_visible() then
+              return cmp.select_and_accept()
+            end
+          end,
+          "fallback",
+        },
+        ["<S-Tab>"] = { "select_prev", "fallback" },
+        ["<C-space>"] = { "show", "fallback" },
+        ["<C-q>"] = { "select_and_accept", "fallback" },
+        ["<CR>"] = { "select_and_accept", "fallback" },
+        ["<C-e>"] = { "cancel", "fallback" },
+        ["<C-k>"] = { "show_documentation", "hide_documentation", "fallback" },
+        ["<C-j>"] = { "show_signature", "hide_signature", "fallback" },
+        ["<C-d>"] = { "scroll_documentation_down", "fallback" },
+        ["<C-u>"] = { "scroll_documentation_up", "fallback" },
       },
       cmdline = {
-        enabled = false,
+        enabled = true,
       },
       sources = {
         default = { "lsp", "path", "references", "git", "snippets", "buffer", "emoji" },
@@ -84,8 +102,13 @@ return {
           treesitter_highlighting = true,
         },
         menu = {
-          auto_show = true,
+          auto_show = false,
         },
+        ghost_text = {
+          enabled = true,
+          show_with_menu = false, -- only show when menu is closed
+        },
+        trigger = {},
       },
       signature = { enabled = true },
     },

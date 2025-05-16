@@ -11,18 +11,19 @@ return {
     opts = {
       styles = {},
       bigfile = { notify = false },
-      quickfile = {},
+      -- quickfile = {},
       picker = {},
       indent = {},
-      notifier = {},
+      lazygit = {},
+      input = {},
     },
     keys = {
       {
-        "<leader>vn",
+        "<leader>lg",
         function()
-          require("snacks").notifier.show_history()
+          require("snacks").lazygit.open()
         end,
-        desc = "[n]otifier history",
+        desc = "[l]azy [g]it",
       },
     },
   },

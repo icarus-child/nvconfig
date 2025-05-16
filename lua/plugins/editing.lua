@@ -111,10 +111,70 @@ return {
   {
     "monaqa/dial.nvim",
     keys = {
-      { "<C-a>", "<Plug>(dial-increment)", mode = { "n", "v" } },
-      { "<C-x>", "<Plug>(dial-decrement)", mode = { "n", "v" } },
-      { "g<C-a>", "g<Plug>(dial-increment)", mode = { "n", "v" } },
-      { "g<C-x>", "g<Plug>(dial-decrement)", mode = { "n", "v" } },
+      {
+        "<C-a>",
+        function()
+          require("dial.map").manipulate("increment", "normal")
+        end,
+        mode = { "n" },
+        desc = "dial increment",
+      },
+      {
+        "<C-x>",
+        function()
+          require("dial.map").manipulate("decrement", "normal")
+        end,
+        mode = { "n" },
+        desc = "dial decrement",
+      },
+      {
+        "g<C-a>",
+        function()
+          require("dial.map").manipulate("increment", "gnormal")
+        end,
+        mode = { "n" },
+        desc = "dial increment g",
+      },
+      {
+        "g<C-x>",
+        function()
+          require("dial.map").manipulate("decrement", "gnormal")
+        end,
+        mode = { "n" },
+        desc = "dial decrement g",
+      },
+      {
+        "<C-a>",
+        function()
+          require("dial.map").manipulate("increment", "visual")
+        end,
+        mode = { "v" },
+        desc = "dial increment",
+      },
+      {
+        "<C-x>",
+        function()
+          require("dial.map").manipulate("decrement", "visual")
+        end,
+        mode = { "v" },
+        desc = "dial decrement",
+      },
+      {
+        "g<C-a>",
+        function()
+          require("dial.map").manipulate("increment", "gvisual")
+        end,
+        mode = { "v" },
+        desc = "dial increment g",
+      },
+      {
+        "g<C-x>",
+        function()
+          require("dial.map").manipulate("decrement", "gvisual")
+        end,
+        mode = { "v" },
+        desc = "dial decrement g",
+      },
     },
   },
 

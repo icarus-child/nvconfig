@@ -34,6 +34,11 @@ return {
           map("gr", vim.lsp.buf.references, "[g]o to [r]eferences")
           map("<leader>lq", vim.diagnostic.setqflist, "diagnostic [q]uickfix")
           map("<leader>ca", vim.lsp.buf.code_action, "[c]ode [a]ction")
+          map("<leader>lr", function()
+            vim.ui.input({ prompt = "LSP Rename " }, function(name)
+              vim.lsp.buf.rename(name)
+            end)
+          end, "LSP: [r]ename")
         end,
       })
 
