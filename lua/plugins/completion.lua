@@ -25,7 +25,7 @@ return {
         "saghen/blink.compat",
         dev = false,
         lazy = true,
-        opts = { impersonate_nvim_cmp = true, enable_events = true, debug = true },
+        opts = {},
       },
       {
         "jmbuhr/cmp-pandoc-references",
@@ -64,10 +64,10 @@ return {
         enabled = true,
       },
       sources = {
-        default = { "lsp", "path", "references", "git", "snippets", "buffer", "emoji" },
-        per_filetype = {
-          r = { inherit_defaults = true, "cmp_r" },
-        },
+        default = { "lsp", "path", "references", "git", "snippets", "buffer", "emoji", "cmp_r" },
+        -- per_filetype = {
+        --   r = { inherit_defaults = true, "cmp_r" },
+        -- },
         providers = {
           emoji = {
             module = "blink-emoji",
@@ -89,7 +89,7 @@ return {
           },
           symbols = { name = "symbols", module = "blink.compat.source" },
           cmp_r = {
-            module = "cmp_r",
+            module = "blink.compat.source",
             name = "cmp_r",
           },
         },
