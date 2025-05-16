@@ -24,6 +24,7 @@ return {
       {
         "saghen/blink.compat",
         dev = false,
+        lazy = true,
         opts = { impersonate_nvim_cmp = true, enable_events = true, debug = true },
       },
       {
@@ -31,7 +32,6 @@ return {
         dev = false,
         ft = { "quarto", "markdown", "rmarkdown" },
       },
-      { "kdheepak/cmp-latex-symbols", event = "VeryLazy" },
     },
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
@@ -79,8 +79,8 @@ return {
             end,
           },
           references = {
-            name = "pandoc_references",
             module = "cmp-pandoc-references.blink",
+            name = "pandoc_references",
             score_offset = 2,
           },
           symbols = { name = "symbols", module = "blink.compat.source" },
