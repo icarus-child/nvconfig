@@ -55,7 +55,7 @@ return {
         ["<CR>"] = { "select_and_accept", "fallback" },
         ["<C-e>"] = { "cancel", "fallback" },
         ["<C-k>"] = { "show_documentation", "hide_documentation", "fallback" },
-        ["<C-j>"] = { "show_signature", "hide_signature", "fallback" },
+        ["<C-n>"] = { "show_signature", "hide_signature", "fallback" },
         ["<C-d>"] = { "scroll_documentation_down", "fallback" },
         ["<C-u>"] = { "scroll_documentation_up", "fallback" },
       },
@@ -108,7 +108,16 @@ return {
           enabled = true,
           show_with_menu = false, -- only show when menu is closed
         },
-        trigger = {},
+        trigger = {
+          show_on_insert_on_trigger_character = true,
+          show_on_x_blocked_trigger_characters = {
+            "'",
+            '"',
+            "(",
+            "{",
+            "[",
+          },
+        },
       },
       signature = { enabled = true },
     },

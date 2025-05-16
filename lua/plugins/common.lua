@@ -31,7 +31,10 @@ return {
     "mason-org/mason.nvim",
     Cmd = "Mason",
     build = ":MasonUpdate",
-    opts_extended = { "ensure_installed" },
+    dependencies = {
+      { "mason-org/mason-lspconfig.nvim", enabled = false },
+    },
+    opts_extend = { "ensure_installed" },
     opts = {
       ensure_installed = {
         -- lsp

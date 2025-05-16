@@ -1,12 +1,20 @@
 return {
   {
     "nvim-neotest/neotest",
-    dependencies = { "nvim-neotest/neotest-python" },
+    dependencies = {
+      "nvim-neotest/neotest-python",
+      "alfaix/neotest-gtest",
+      "nvim-neotest/nvim-nio",
+      "nvim-lua/plenary.nvim",
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
     config = function()
       ---@diagnostic disable-next-line: missing-fields
       require("neotest").setup {
         adapters = {
           require "neotest-python",
+          require("neotest-gtest").setup {},
         },
       }
     end,

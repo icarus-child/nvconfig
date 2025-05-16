@@ -35,6 +35,11 @@ return {
     enabled = true,
     lazy = false,
     priority = 1000,
+    -- opts = {
+    --   options = {
+    --     transparent = true,
+    --   },
+    -- },
   },
 
   -- color html colors
