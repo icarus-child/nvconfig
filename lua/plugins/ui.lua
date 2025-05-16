@@ -56,7 +56,7 @@ return {
     event = "FileType qf",
   },
 
-  { "akinsho/toggleterm.nvim", version = "*", config = true },
+  { "akinsho/toggleterm.nvim", enabled = false, version = "*", config = true },
 
   -- telescope
   -- a nice seletion UI also to find and open files

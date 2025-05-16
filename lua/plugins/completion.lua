@@ -32,6 +32,7 @@ return {
         dev = false,
         ft = { "quarto", "markdown", "rmarkdown" },
       },
+      { "R-nvim/cmp-r" },
     },
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
@@ -64,6 +65,9 @@ return {
       },
       sources = {
         default = { "lsp", "path", "references", "git", "snippets", "buffer", "emoji" },
+        per_filetype = {
+          r = { inherit_defaults = true, "cmp_r" },
+        },
         providers = {
           emoji = {
             module = "blink-emoji",
@@ -84,6 +88,10 @@ return {
             score_offset = 2,
           },
           symbols = { name = "symbols", module = "blink.compat.source" },
+          cmp_r = {
+            module = "cmp_r",
+            name = "cmp_r",
+          },
         },
       },
       appearance = {
