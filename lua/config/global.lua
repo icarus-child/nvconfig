@@ -147,7 +147,7 @@ vim.opt.cursorline = true
 vim.opt.cursorlineopt = "both"
 
 -- session save
-vim.opt.sessionoptions = "curdir,folds,globals,help,tabpages,terminal,winsize"
+vim.o.sessionoptions = "buffers,curdir,folds,options,tabpages,winsize"
 
 -- fixes changing every file I open for git commits
 -- vim.opt.fixendofline = false

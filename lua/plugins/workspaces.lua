@@ -1,50 +1,52 @@
 return {
-  -- manage projects
   {
-    "gnikdroy/projections.nvim",
+    "olimorris/persisted.nvim",
+    event = "BufReadPre",
     keys = {
       {
         "<leader>fp",
-        function()
-          vim.cmd "Telescope projections"
-        end,
+        "<cmd>Telescope persisted<cr>",
         desc = "[p]rojects",
       },
     },
-    config = function()
-      -- Save localoptions to session file
-      vim.opt.sessionoptions:append "localoptions"
-      require("projections").setup {
-        store_hooks = {
-          pre = function()
-            -- nvim-tree
-            local nvim_tree_present, api = pcall(require, "nvim-tree.api")
-            if nvim_tree_present then
-              api.tree.close()
-            end
-          end,
+    opts = {
+      autoload = true,
+      use_git_branch = true,
+      on_autoload_no_session = function()
+        vim.notify "No existing session to load."
+      end,
+      telescope = {
+        -- Mappings for managing sessions in Telescope
+        mappings = {
+          copy_session = "<C-c>",
+          change_branch = "<C-b>",
+          delete_session = "<C-d>",
         },
-      }
+      },
+    },
+    config = function()
+      -- use the Telescope extension to load a session,
+      -- saving the current session before clearing all of the open buffers
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "PersistedTelescopeLoadPre",
+        ---@diagnostic disable-next-line: unused-local
+        callback = function(session)
+          -- Save the currently loaded session passing in the path to the current session
+          require("persisted").save { session = vim.g.persisted_loaded_session }
 
-      -- Autostore session on VimExit
-      local Session = require "projections.session"
-      vim.api.nvim_create_autocmd({ "VimLeavePre" }, {
-        callback = function()
-          local cwd = vim.loop.cwd()
-          if cwd ~= nil then
-            Session.store(cwd)
-          end
+          -- Delete all of the open buffers
+          vim.api.nvim_input "<ESC>:wa!<CR>"
+          vim.api.nvim_input "<ESC>:%bd!<CR>"
         end,
       })
 
-      -- Switch to project if vim was started in a project dir
-      local switcher = require "projections.switcher"
-      vim.api.nvim_create_autocmd({ "VimEnter" }, {
+      -- ensure that certain filetypes are removed from the session before it's saved
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "PersistedSavePre",
         callback = function()
-          if vim.fn.argc() == 0 then
-            local cwd = vim.loop.cwd()
-            if cwd ~= nil then
-              switcher.switch(cwd)
+          for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+            if vim.bo[buf].filetype == "codecompanion" then
+              vim.api.nvim_buf_delete(buf, { force = true })
             end
           end
         end,
