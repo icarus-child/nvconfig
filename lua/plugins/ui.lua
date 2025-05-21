@@ -232,7 +232,7 @@ return {
       "nvim-tree/nvim-web-devicons",
     },
     keys = {
-      { "<leader>tw", "<cmd>Tabby pick_window<cr>", desc = "[t]abby pick [w]indow" },
+      { "<leader>tw", "<cmd>Tabby pick_window<cr>", desc = "tabby pick [w]indow" },
       { "<leader>tt", "<cmd>Tabby jump_to_tab<cr>", desc = "tabby [j]ump" },
       {
         "<leader>tr",
@@ -243,7 +243,7 @@ return {
             end
           end)
         end,
-        "[t]abby [r]ename tab",
+        desc = "tabby [r]ename tab",
       },
     },
     config = function()

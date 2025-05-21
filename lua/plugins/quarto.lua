@@ -134,10 +134,35 @@ return {
     end,
   },
 
-  { -- preview equations
+  {
     "jbyuki/nabla.nvim",
+    dependencies = {
+      "nvim-neo-tree/neo-tree.nvim",
+      "williamboman/mason.nvim",
+    },
+    lazy = true,
+
+    config = function()
+      require("nvim-treesitter.configs").setup {
+        ensure_installed = { "latex" },
+        auto_install = true,
+        sync_install = false,
+      }
+    end,
+
     keys = {
-      { "<leader>qm", ':lua require"nabla".toggle_virt()<cr>', desc = "toggle [m]ath equations" },
+      {
+        "<leader>qn",
+        function()
+          require("nabla").popup()
+        end,
+        desc = "[n]abla latex popup",
+      },
+      {
+        "<leader>qm",
+        ':lua require"nabla".toggle_virt()<cr>',
+        desc = "toggle [m]ath equations",
+      },
     },
   },
 
@@ -147,6 +172,7 @@ return {
     enabled = true,
     version = "^1.0.0", -- use version <2.0.0 to avoid breaking changes
     build = ":UpdateRemotePlugins",
+    lazy = false,
     init = function()
       vim.g.molten_image_provider = "image.nvim"
       -- vim.g.molten_output_win_max_height = 20
@@ -158,7 +184,15 @@ return {
       local init = function()
         local quarto_cfg = require("quarto.config").config
         quarto_cfg.codeRunner.default_method = "molten"
-        vim.cmd [[MoltenInit]]
+
+        local venv = os.getenv "VIRTUAL_ENV" or os.getenv "CONDA_PREFIX"
+        if venv ~= nil then
+          -- in the form of /home/benlubas/.virtualenvs/VENV_NAME
+          venv = string.match(venv, "/.+/(.+)")
+          vim.cmd(("MoltenInit %s"):format(venv))
+        else
+          vim.cmd "MoltenInit python3"
+        end
       end
       local deinit = function()
         local quarto_cfg = require("quarto.config").config

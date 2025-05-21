@@ -97,9 +97,9 @@ return {
   {
     "Wansmer/treesj",
     keys = {
-      { "<leader>tm", "<cmd>TSJToggle<cr>", desc = "[t]reesj [t]oggle" },
-      { "<leader>tj", "<cmd>TSJJoin<cr>", desc = "[t]reesj [j]oin" },
-      { "<leader>ts", "<cmd>TSJSplit<cr>", desc = "[t]reesj [s]plit" },
+      { "<leader>tm", "<cmd>TSJToggle<cr>", desc = "treesj [t]oggle" },
+      { "<leader>tj", "<cmd>TSJJoin<cr>", desc = "treesj [j]oin" },
+      { "<leader>ts", "<cmd>TSJSplit<cr>", desc = "treesj [s]plit" },
     },
     -- if you install parsers with `nvim-treesitter`
     dependencies = { "nvim-treesitter/nvim-treesitter" },

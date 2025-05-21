@@ -151,3 +151,13 @@ vim.o.sessionoptions = "buffers,curdir,folds,options,tabpages,resize"
 
 -- fixes changing every file I open for git commits
 -- vim.opt.fixendofline = false
+
+-- python venv
+-- mkdir ~/.virtualenvs
+-- python -m venv ~/.virtualenvs/neovim # create a new venv
+-- # note, activate is a bash/zsh script, use activate.fish for fish shell
+-- source ~/.virtualenvs/neovim/bin/activate # activate the venv
+--
+-- molten dependency
+-- pip install pynvim jupyter_client cairosvg plotly kaleido pnglatex pyperclip
+vim.g.python3_host_prog = vim.fn.expand "~/.virtualenvs/neovim/bin/python3"
