@@ -39,17 +39,7 @@ return {
     opts = {
       keymap = {
         preset = "none",
-
-        ["<Tab>"] = {
-          function(cmp)
-            if cmp.is_menu_visible() then
-              return cmp.select_next()
-            elseif cmp.is_ghost_text_visible() then
-              return cmp.select_and_accept()
-            end
-          end,
-          "fallback",
-        },
+        ["<Tab>"] = { "select_next", "fallback" },
         ["<S-Tab>"] = { "select_prev", "fallback" },
         ["<C-space>"] = { "show", "fallback" },
         ["<C-q>"] = { "select_and_accept", "fallback" },
@@ -64,7 +54,16 @@ return {
         enabled = true,
       },
       sources = {
-        default = { "lsp", "path", "references", "git", "snippets", "buffer", "emoji", "cmp_r" },
+        default = {
+          "lsp",
+          "path",
+          "references",
+          "git",
+          "snippets",
+          "buffer",
+          -- "emoji",
+          "cmp_r",
+        },
         -- per_filetype = {
         --   r = { inherit_defaults = true, "cmp_r" },
         -- },
@@ -110,10 +109,10 @@ return {
           treesitter_highlighting = true,
         },
         menu = {
-          auto_show = false,
+          auto_show = true,
         },
         ghost_text = {
-          enabled = true,
+          enabled = false,
           show_with_menu = false, -- only show when menu is closed
         },
         trigger = {
