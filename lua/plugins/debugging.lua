@@ -173,6 +173,25 @@ return {
         },
       }
 
+      dap.configurations.lldb = {
+        type = "executable",
+        command = "rust-lldb",
+        name = "lldb",
+      }
+      dap.configurations.rust = {
+        {
+          name = "hello-world",
+          type = "lldb",
+          request = "launch",
+          program = "${file}",
+          -- program = function()
+          --   return vim.fn.getcwd() .. "/target/debug/hello-world"
+          -- end,
+          cwd = "${workspaceFolder}",
+          stopOnEntry = false,
+        },
+      }
+
       dap.listeners.before.attach.dapui_config = function()
         ui.open()
       end
