@@ -35,10 +35,12 @@ return {
         },
         highlight = {
           enable = true,
-          additional_vim_regex_highlighting = false,
+          additional_vim_regex_highlighting = { "latex", "markdown" },
+          disable = { "latex" },
         },
         indent = {
           enable = true,
+          disable = { "latex" },
         },
         incremental_selection = {
           enable = true,
