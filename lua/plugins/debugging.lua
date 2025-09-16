@@ -192,6 +192,28 @@ return {
         },
       }
 
+      dap.configurations.codelldb = {
+        type = "server",
+        port = "${port}",
+        executable = {
+          command = "codelldb",
+          args = { "--port", "${port}" },
+        },
+      }
+      dap.configurations.cpp = {
+        {
+          name = "hello-world",
+          type = "lldb",
+          request = "launch",
+          program = "${file}",
+          -- program = function()
+          --   return vim.fn.getcwd() .. "/target/debug/hello-world"
+          -- end,
+          cwd = "${workspaceFolder}",
+          stopOnEntry = false,
+        },
+      }
+
       dap.listeners.before.attach.dapui_config = function()
         ui.open()
       end
