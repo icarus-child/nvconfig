@@ -115,7 +115,7 @@ return {
       lspconfig.ts_ls.setup {
         capabilities = capabilities,
         flags = lsp_flags,
-        filetypes = { "js", "javascript", "typescript", "ojs" },
+        filetypes = { "js", "javascript", "typescript", "ojs", "typescriptreact", "typescript.tsx" },
       }
 
       lspconfig.lua_ls.setup {
