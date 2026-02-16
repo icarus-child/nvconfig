@@ -22,7 +22,6 @@ return {
       },
     },
     config = function()
-      local lspconfig = require "lspconfig"
       local util = require "lspconfig.util"
 
       vim.api.nvim_create_autocmd("LspAttach", {
@@ -66,127 +65,111 @@ return {
       --   root_dir = util.root_pattern('.git', '.marksman.toml', '_quarto.yml'),
       -- }
 
-      lspconfig.r_language_server.setup {
-        capabilities = capabilities,
-        flags = lsp_flags,
-        filetypes = { "r", "rmd", "rmarkdown" }, -- not directly using it for quarto (as that is handled by otter and often contains more languanges than just R)
-        settings = {
-          r = {
-            lsp = {
-              rich_documentation = true,
-            },
-          },
-        },
-      }
-
-      lspconfig.cssls.setup {
-        capabilities = capabilities,
-        flags = lsp_flags,
-      }
-
-      -- lspconfig.html.setup {
-      --   capabilities = capabilities,
-      --   flags = lsp_flags,
-      -- }
-
-      lspconfig.yamlls.setup {
-        capabilities = capabilities,
-        flags = lsp_flags,
-        settings = {
-          yaml = {
-            schemaStore = {
-              enable = true,
-              url = "",
-            },
-          },
-        },
-      }
-
-      lspconfig.jsonls.setup {
-        capabilities = capabilities,
-        flags = lsp_flags,
-      }
-
-      lspconfig.texlab.setup {
-        capabilities = capabilities,
-        flags = lsp_flags,
-      }
-
-      lspconfig.ts_ls.setup {
-        capabilities = capabilities,
-        flags = lsp_flags,
-        filetypes = { "js", "javascript", "typescript", "ojs", "typescriptreact", "typescript.tsx" },
-      }
-
-      lspconfig.lua_ls.setup {
-        capabilities = capabilities,
-        flags = lsp_flags,
-        settings = {
-          Lua = {
-            runtime = {
-              -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-              version = "LuaJIT",
-            },
-            diagnostics = {
-              -- Get the language server to recognize the `vim` global
-              globals = { "vim" },
-            },
-            workspace = {
-              -- Make the server aware of Neovim runtime files
-              library = vim.api.nvim_get_runtime_file("", true),
-            },
-            -- Do not send telemetry data containing a randomized but unique identifier
-            telemetry = {
-              enable = true,
-            },
-          },
-        },
-      }
-
-      lspconfig.vimls.setup {
-        capabilities = capabilities,
-        flags = lsp_flags,
-      }
-
-      lspconfig.bashls.setup {
-        capabilities = capabilities,
-        flags = lsp_flags,
-        filetypes = { "sh", "bash" },
-      }
-
       -- Add additional languages here.
       -- See `:h lspconfig-all` for the configuration.
-      -- Like e.g. Haskell:
-      -- lspconfig.hls.setup {
-      --   capabilities = capabilities,
-      --   flags = lsp_flags,
-      --   filetypes = { 'haskell', 'lhaskell', 'cabal' },
-      -- }
-
-      lspconfig.clangd.setup {
-        capabilities = capabilities,
-        flags = lsp_flags,
-      }
-
-      lspconfig.gopls.setup {
-        capabilities = capabilities,
-        settings = {
-          gopls = {
-            completeUnimported = true,
-            gofumpt = true,
+      local lsps = {
+        {
+          "r_language_server",
+          {
+            capabilities = capabilities,
+            flags = lsp_flags,
+            filetypes = { "r", "rmd", "rmarkdown" }, -- not directly using it for quarto (as that is handled by otter and often contains more languanges than just R)
+            settings = {
+              r = {
+                lsp = {
+                  rich_documentation = true,
+                },
+              },
+            },
           },
         },
+        { "cssls" },
+        -- { "html" },
+        {
+          "yamlls",
+          {
+            capabilities = capabilities,
+            flags = lsp_flags,
+            settings = {
+              yaml = {
+                schemaStore = {
+                  enable = true,
+                  url = "",
+                },
+              },
+            },
+          },
+        },
+        { "jsonls" },
+        { "texlab" },
+        {
+          "ts_ls",
+          {
+            capabilities = capabilities,
+            flags = lsp_flags,
+            filetypes = { "js", "javascript", "typescript", "ojs", "typescriptreact", "typescript.tsx" },
+          },
+        },
+        {
+          "lua_ls",
+          {
+            capabilities = capabilities,
+            flags = lsp_flags,
+            settings = {
+              Lua = {
+                runtime = {
+                  -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                  version = "LuaJIT",
+                },
+                diagnostics = {
+                  -- Get the language server to recognize the `vim` global
+                  globals = { "vim" },
+                },
+                workspace = {
+                  -- Make the server aware of Neovim runtime files
+                  library = vim.api.nvim_get_runtime_file("", true),
+                },
+                -- Do not send telemetry data containing a randomized but unique identifier
+                telemetry = {
+                  enable = true,
+                },
+              },
+            },
+          },
+        },
+        { "vimls" },
+        {
+          "bashls",
+          {
+            capabilities = capabilities,
+            flags = lsp_flags,
+            filetypes = { "sh", "bash" },
+          },
+        },
+        { "clangd" },
+        {
+          "gopls",
+          {
+            capabilities = capabilities,
+            settings = {
+              gopls = {
+                completeUnimported = true,
+                gofumpt = true,
+              },
+            },
+          },
+        },
+        { "gdscript" },
+        { "rust_analyzer" },
       }
 
-      lspconfig.gdscript.setup {
-        capabilities = capabilities,
-        flags = lsp_flags,
-      }
-
-      lspconfig.rust_analyzer.setup {
-        capabilities = capabilities,
-        flags = lsp_flags,
-      }
+      for _, lsp in pairs(lsps) do
+        local name, config = lsp[1], lsp[2]
+        vim.lsp.enable(name)
+        if config then
+          vim.lsp.config(name, config)
+        end
+      end
 
       -- See https://github.com/neovim/neovim/issues/23291
       -- disable lsp watcher.
@@ -198,7 +181,8 @@ return {
       end
       capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
 
-      lspconfig.pyright.setup {
+      vim.lsp.enable "pyright"
+      vim.lsp.config("pyright", {
         capabilities = capabilities,
         flags = lsp_flags,
         settings = {
@@ -213,7 +197,7 @@ return {
         root_dir = function(fname)
           return util.root_pattern(".git", "setup.py", "setup.cfg", "pyproject.toml", "requirements.txt")(fname)
         end,
-      }
+      })
     end,
   },
 }

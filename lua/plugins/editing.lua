@@ -288,7 +288,7 @@ return {
   -- in-file traversal
   -- lazy loads itself, attempting to lazy load can cause issues
   {
-    "ggandor/leap.nvim",
+    url = "https://codeberg.org/andyg/leap.nvim",
     lazy = false,
     opts = function()
       vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap-forward)", { desc = "leap forward" })
