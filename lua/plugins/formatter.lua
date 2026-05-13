@@ -60,6 +60,7 @@ return {
             teal = "tl",
             r = "r",
             typescript = "ts",
+            gdscript = "gd",
           },
           -- Map of treesitter language to formatters to use
           -- (defaults to the value from formatters_by_ft)
