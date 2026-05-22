@@ -172,6 +172,7 @@ return {
           "gopls",
           {
             capabilities = capabilities,
+            flags = lsp_flags,
             settings = {
               gopls = {
                 completeUnimported = true,
@@ -180,7 +181,12 @@ return {
             },
           },
         },
-        { "gdscript" },
+        {
+          "gdscript",
+          capabilities = capabilities,
+          flags = lsp_flags,
+          root_dir = util.root_pattern(".git", ".godot"),
+        },
         { "rust_analyzer" },
       }
 

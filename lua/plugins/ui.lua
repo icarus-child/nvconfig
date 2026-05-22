@@ -58,6 +58,26 @@ return {
 
   { "akinsho/toggleterm.nvim", enabled = false, version = "*", config = true },
 
+  {
+    "csmhowitzer/auto_cwd",
+    -- event = "VeryLazy",
+    config = function()
+      require("auto_cwd").setup {
+        enabled_languages = { "csharp", "golang", "frontend", "gdscript" },
+        fallback_to_git = true,
+        cache_enabled = true,
+        debug = false,
+        custom_languages = {
+          gdscript = {
+            patterns = { "*.gd" },
+            root_indicators = { ".godot", ".git" },
+            priority = { ".godot", ".git" },
+          },
+        },
+      }
+    end,
+  },
+
   -- telescope
   -- a nice seletion UI also to find and open files
   {
@@ -123,6 +143,7 @@ return {
             "node%_modules",
             "%_cache",
             "%.git/",
+            "%.godot/",
             "site%_libs",
             "%.venv/",
             "%_files/libs/",
