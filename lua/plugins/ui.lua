@@ -497,15 +497,6 @@ return {
     cmd = { "CsvViewEnable", "CsvViewDisable", "CsvViewToggle" },
   },
 
-  {
-    "vhyrro/luarocks.nvim",
-    priority = 1001, -- this plugin needs to run before anything else
-    lazy = false,
-    opts = {
-      rocks = { "magick" },
-    },
-  },
-
   { -- show images in nvim!
     "3rd/image.nvim",
     lazy = true,
