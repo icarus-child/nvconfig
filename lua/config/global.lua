@@ -142,6 +142,9 @@ vim.filetype.add {
 -- filter quickfix list with Cfilter
 vim.cmd.packadd "cfilter"
 
+-- Expand 'cc' in 'CodeCompanion' in the command line
+vim.cmd [[cab cc CodeCompanion]]
+
 -- to enable cursorline
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "both"

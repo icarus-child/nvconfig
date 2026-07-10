@@ -63,10 +63,11 @@ return {
           "buffer",
           -- "emoji",
           "cmp_r",
+          per_filetype = {
+            codecompanion = { "codecompanion" },
+            -- r = { inherit_defaults = true, "cmp_r" },
+          },
         },
-        -- per_filetype = {
-        --   r = { inherit_defaults = true, "cmp_r" },
-        -- },
         providers = {
           emoji = {
             module = "blink-emoji",
@@ -158,16 +159,17 @@ return {
   -- LLMs
   {
     "olimorris/codecompanion.nvim",
-    version = "*",
-    enabled = false,
+    enabled = true,
+    event = "VeryLazy",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
+      -- "nvim-treesitter/nvim-treesitter",
       "nvim-telescope/telescope.nvim",
     },
     keys = {
-      { "<leader>ac", ":CodeCompanionChat Toggle<cr>", desc = "[a]i [c]hat" },
-      { "<leader>aa", ":CodeCompanionActions<cr>", desc = "[a]i [a]actions" },
+      { "<leader>ac", "<cmd>CodeCompanionChat Toggle<cr>", mode = { "n", "v" }, desc = "[a]i [c]hat" },
+      { "<leader>aa", "<cmd>CodeCompanionActions<cr>", mode = { "n", "v" }, desc = "[a]i [a]actions" },
+      { "ga", "<cmd>CodeCompanionChat Add<cr>", mode = "v", desc = "add chat" },
     },
     config = function()
       require("codecompanion").setup {
@@ -176,18 +178,54 @@ return {
             enabled = true,
           },
         },
-        strategies = {
+        adapters = {
+          http = {
+            ollama = function()
+              return require("codecompanion.adapters").extend("ollama", {
+                env = {
+                  url = "http://127.0.0.1:11434", -- change if remote
+                },
+                schema = {
+                  model = {
+                    default = "qwen3.6:27b",
+                  },
+                  num_ctx = {
+                    default = 16384, -- raise from Ollama's default 2048/4096
+                  },
+                },
+              })
+            end,
+          },
+        },
+        interactions = {
           chat = {
-            -- adapter = "ollama",
-            adapter = "copilot",
+            adapter = "ollama",
+            -- adapter = "copilot",
+            keymaps = {
+              send = {
+                modes = { n = "<C-s>", i = "<C-s>" },
+                opts = {},
+              },
+              close = {
+                modes = { n = "<C-c>", i = "<C-c>" },
+                opts = {},
+              },
+            },
           },
           inline = {
-            -- adapter = "ollama",
-            adapter = "copilot",
-          },
-          agent = {
-            -- adapter = "ollama",
-            adapter = "copilot",
+            adapter = "ollama",
+            -- adapter = "copilot",
+            keymaps = {
+              accept_change = {
+                modes = { n = "ga" },
+                description = "Accept the suggested change",
+              },
+              reject_change = {
+                modes = { n = "gr" },
+                opts = { nowait = true },
+                description = "Reject the suggested change",
+              },
+            },
           },
         },
       }

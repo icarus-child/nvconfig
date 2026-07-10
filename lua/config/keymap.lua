@@ -353,6 +353,7 @@ end
 -- normal mode with <leader>
 wk.add({
   {
+    { "<leader>a", group = "[a]i / harpoon" },
     { "<leader>c", group = "[c]ode / [c]ell / [c]hunk" },
     { "<leader>ct", "<cmd>TodoQuickFix<cr>", desc = "open [T]ODO comment list" },
     { "<leader>d", group = "[d]ebug" },

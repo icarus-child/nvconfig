@@ -306,20 +306,19 @@ return {
     keys = {
       -- Keymaps
       {
-        "<leader>a",
+        "<leader>af",
         function()
           require("harpoon"):list():add()
         end,
-        desc = "[a]dd file to harpoon list",
+        desc = "[a]dd [f]ile to harpoon list",
       },
       {
-        "<leader>fn",
+        "<leader>ah",
         function()
           require("harpoon").ui:toggle_quick_menu(require("harpoon"):list())
         end,
-        desc = "toggle harpoon menu",
+        desc = "[h]arpoon menu",
       },
-
       {
         "<localleader>a",
         function()
@@ -347,6 +346,34 @@ return {
           require("harpoon"):list():select(4)
         end,
         desc = "select harpoon slot 4",
+      },
+      {
+        "<localleader>z",
+        function()
+          require("harpoon"):list():select(5)
+        end,
+        desc = "select harpoon slot 5",
+      },
+      {
+        "<localleader>x",
+        function()
+          require("harpoon"):list():select(6)
+        end,
+        desc = "select harpoon slot 6",
+      },
+      {
+        "<localleader>c",
+        function()
+          require("harpoon"):list():select(7)
+        end,
+        desc = "select harpoon slot 7",
+      },
+      {
+        "<localleader>v",
+        function()
+          require("harpoon"):list():select(8)
+        end,
+        desc = "select harpoon slot 8",
       },
     },
     config = function()
