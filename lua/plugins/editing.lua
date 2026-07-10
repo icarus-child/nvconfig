@@ -290,11 +290,62 @@ return {
   {
     url = "https://codeberg.org/andyg/leap.nvim",
     lazy = false,
-    opts = function()
-      vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap-forward)", { desc = "leap forward" })
-      vim.keymap.set({ "n", "x", "o" }, "S", "<Plug>(leap-backward)", { desc = "leap backward" })
-      vim.keymap.set({ "n", "x", "o" }, "gs", "<Plug>(leap-from-window)", { desc = "leap from window" })
-      require("leap").opts.equivalence_classes = { " \t\r\n", "([{", ")]}", "'\"`" }
+    config = function()
+      vim.keymap.set({ 'n', 'x', 'o' }, 's', '<Plug>(leap)')
+      vim.keymap.set('n',               'S', '<Plug>(leap-from-window)')
+        
+      -- E.g., `gs{leap}$y` or `ygs{leap}$`, where {leap}, as usual, means
+      -- {char1}{char2}{label?}. The linewise version can also take [count],
+      -- e.g. `d2gS{leap}` deletes two lines.
+      vim.keymap.set({ 'n', 'o' }, 'gs', '<Plug>(leap-remote)')
+      vim.keymap.set({ 'n', 'o' }, 'gS', '<Plug>(leap-remote-linewise)')
+      -- Useful shortcut for a frequent operation: the same as remote-linewise,
+      -- except it auto-triggers even without [count] (`yR{leap}` copies a line).
+      vim.keymap.set({ 'o' },      'R',  '<Plug>(leap-remote-line)')
+      -- These commands expect another character as input before leaping, and
+      -- select the given text object at the destination (`yarp{leap}`).
+      vim.keymap.set({ 'x', 'o' }, 'ar', '<Plug>(leap-remote-text-object)')
+      vim.keymap.set({ 'x', 'o' }, 'ir', '<Plug>(leap-remote-inner-text-object)')
+
+      -- Set automatic paste after yanking:
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'RemoteOperationDone',
+        group = vim.api.nvim_create_augroup('LeapRemote', {}),
+        callback = function(event)
+          if vim.v.operator == 'y' and event.data.register == '"' then
+            vim.cmd('normal! p')
+          end
+        end,
+      })
+
+      -- Highly recommended: define a preview filter to reduce visual noise
+      -- and the blinking effect after the first keypress.
+      -- For example, define word boundaries as the common case, that is, skip
+      -- preview for matches starting with whitespace or an alphabetic
+      -- mid-word character: foobar[baaz] = quux
+      --                     ^    ^^^  ^^ ^ ^  ^
+      require('leap').opts.preview = function(ch0, ch1, ch2)
+        return not (
+          ch1:match('%s')
+          or (ch0:match('%a') and ch1:match('%a') and ch2:match('%a'))
+        )
+      end
+
+      -- Enable the traversal keys to repeat the previous search without
+      -- explicitly invoking Leap (`<cr><cr>...` instead of `s<cr><cr>...`):
+      do
+        local clever = require('leap.user').with_traversal_keys
+        vim.keymap.set({ 'n', 'x', 'o' }, '<cr>', function()
+          require('leap').leap {
+            ['repeat'] = true, opts = clever('<cr>', '<bs>'),
+          }
+        end)
+        vim.keymap.set({ 'n', 'x', 'o' }, '<bs>', function()
+          require('leap').leap {
+            ['repeat'] = true, opts = clever('<bs>', '<cr>'), backward = true,
+          }
+        end)
+      end
     end,
   },
 
