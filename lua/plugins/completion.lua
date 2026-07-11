@@ -187,7 +187,8 @@ return {
                 },
                 schema = {
                   model = {
-                    default = "qwen3.6:27b",
+                    default = "qwen3.5:9b",
+                    slower = "qwen3.6:27b",
                   },
                   num_ctx = {
                     default = 16384, -- raise from Ollama's default 2048/4096
