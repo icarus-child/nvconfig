@@ -357,6 +357,7 @@ wk.add({
     { "<leader>c", group = "[c]ode / [c]ell / [c]hunk" },
     { "<leader>ct", "<cmd>TodoQuickFix<cr>", desc = "open [T]ODO comment list" },
     { "<leader>d", group = "[d]ebug" },
+    { "<Leader>dg", "<Plug>(doge-generate)", desc = "[d]oc [g]enerate" },
     { "<leader>dt", group = "[t]est" },
     { "<leader>t", group = "[t]abby / [t]reesj" },
     { "<leader>tn", "<cmd>tabnew<CR>", desc = "[n]ew tab" },
