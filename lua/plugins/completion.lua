@@ -65,7 +65,7 @@ return {
           "cmp_r",
           per_filetype = {
             codecompanion = { "codecompanion" },
-            -- r = { inherit_defaults = true, "cmp_r" },
+            r = { inherit_defaults = true, "cmp_r" },
           },
         },
         providers = {
