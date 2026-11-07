@@ -8,12 +8,25 @@ return {
       "marilari88/neotest-vitest",
       "nvim-treesitter/nvim-treesitter",
     },
-    config = function()
-      ---@diagnostic disable-next-line: missing-fields
-      require("neotest").setup {
+    opts = function()
+      local vitest = require "neotest-vitest"
+      local original_is_test_file = vitest.is_test_file
+
+      vitest.filter_dir = function(name, rel_path, root)
+        return name ~= "node_modules" and name ~= "dist"
+      end
+
+      vitest.is_test_file = function(file_path)
+        if file_path:find("/dist/", 1, true) then
+          return false
+        end
+        return original_is_test_file(file_path)
+      end
+
+      return {
         adapters = {
           require("neotest-gtest").setup {},
-          require "neotest-vitest",
+          vitest,
         },
       }
     end,
