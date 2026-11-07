@@ -30,20 +30,15 @@ return {
   {
     "kkoomen/vim-doge",
     event = "BufReadPost",
+    opts = {
+      doge_enable_mappings = false, -- disable default mappings
+    },
   },
 
   -- align text vertically
   {
     "godlygeek/tabular",
     enabled = false,
-  },
-
-  -- generate docstrings
-  {
-    "danymat/neogen",
-    cmd = { "Neogen" },
-    dependencies = "nvim-treesitter/nvim-treesitter",
-    config = true,
   },
 
   -- open links in browser incl. jira tickets, cargo links, etc.
@@ -102,6 +97,7 @@ return {
   -- manipulate asdf => { asdf }
   {
     "Wansmer/treesj",
+    event = "VeryLazy",
     keys = {
       { "<leader>tm", "<cmd>TSJToggle<cr>", desc = "treesj [t]oggle" },
       { "<leader>tj", "<cmd>TSJJoin<cr>", desc = "treesj [j]oin" },
